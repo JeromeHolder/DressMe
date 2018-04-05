@@ -1,12 +1,4 @@
-/* img {
-    display: block;
-    margin: 0 auto;
-} */
-
-/* .nav-wrapper {
-    background-color: darkslategray;
-} */
-
-body, .nav-wrapper {
+body, .nav-link {
     background-color: black;
+    color: white;
 }
