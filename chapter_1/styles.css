@@ -3,6 +3,10 @@
     margin: 0 auto;
 } */
 
-.nav-wrapper {
-    background-color: steelblue;
+/* .nav-wrapper {
+    background-color: darkslategray;
+} */
+
+body, .nav-wrapper {
+    background-color: black;
 }
