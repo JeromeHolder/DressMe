@@ -16,6 +16,22 @@ a.active {
     margin: 20px auto;
 }
 
-#title, #about {
+#title {
     text-align: center;
+}
+
+#aboutimg {
+    position: relative;
+}
+
+#about {
+    position: absolute;
+    margin-top: 0%;
+    margin-left: 5%;
+    max-width: 250px;
+    text-align: left;
+}
+
+#guitar {
+    position: absolute;
 }
