@@ -1,4 +1,21 @@
 body, .nav-link {
     background-color: black;
     color: white;
+    font-family: Copperplate, "Copperplate Gothic Light"
+}
+
+a.nav-link:hover {
+    color: lightslategray;
+}
+
+a.active {
+    color: lightslategray;
+}
+
+.spacing {
+    margin: 20px auto;
+}
+
+#title, #about {
+    text-align: center;
 }
