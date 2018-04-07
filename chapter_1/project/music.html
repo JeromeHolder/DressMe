@@ -25,47 +25,128 @@
             </li>
         </ul>
     
-        <div class="row" id="title">
-            <div class="col-12 col-sm-6 col-md-4 spacing">
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 spacing" style="text-align: center">
                 <span>Fresh</span>
-                <img class='img-fluid' src="./Images/Fresh.jpg" alt="">
+                <a href="https://www.amazon.ca" target="blank" id="a1"><p id="fwrap">Buy</p><img class='img-fluid' id="fresh" src="./Images/Fresh.jpg" alt=""></a>
             </div>
             <div class="col-12 col-sm-6 col-md-4 spacing">
                 <span>Joshua</span>
-                <img class='img-fluid' src="./Images/Joshua.jpg" alt="">
+                <a href="https://www.amazon.ca" target="blank" id="a2"><p id="jwrap">Buy</p><img class='img-fluid' id="joshua" src="./Images/Joshua.jpg" alt=""></a>
             </div>
             <div class="col-12 col-sm-6 col-md-4 spacing">
                 <span>Monolith</span>
-                <img class='img-fluid' src="./Images/Monolith.jpg" alt="">
+                <a href="https://www.amazon.ca" target="blank" id="a3"><p id="mwrap">Buy</p><img class='img-fluid' id="monolith" src="./Images/Monolith.jpg" alt=""></a>
             </div>
             <div class="col-12 col-sm-6 col-md-4 spacing">
                 <span>Out There</span>
-                <img class='img-fluid' src="./Images/Out There.jpg" alt="">
+                <a href="https://www.amazon.ca" target="blank" id="a4"><p id="owrap">Buy</p><img class='img-fluid' id="outThere" src="./Images/Out There.jpg" alt=""></a>
             </div>
             <div class="col-12 col-sm-6 col-md-4 spacing">
                 <span>Path</span>
-                <img class='img-fluid' src="./Images/Path.jpg" alt="">
+                <a href="https://www.amazon.ca" target="blank" id="a5"><p id="pwrap">Buy</p><img class='img-fluid' id="path" src="./Images/Path.jpg" alt=""></a>
             </div>
             <div class="col-12 col-sm-6 col-md-4 spacing">
                 <span>Risen</span>
-                <img class='img-fluid' src="./Images/Risen.jpg" alt="">
+                <a href="https://www.amazon.ca" target="blank" id="a6"><p id="rwrap">Buy</p><img class='img-fluid' id="risen" src="./Images/Risen.jpg" alt=""></a>
             </div>
             <div class="col-12 col-sm-6 col-md-4 spacing">
                 <span>SL</span>
-                <img class='img-fluid' src="./Images/SL.jpg" alt="">
+                <a href="https://www.amazon.ca" target="blank" id="a7"><p id="slwrap">Buy</p><img class='img-fluid' id="sl" src="./Images/SL.jpg" alt=""></a>
             </div>
             <div class="col-12 col-sm-6 col-md-4 spacing">
                 <span>Sunk</span>
-                <img class='img-fluid' src="./Images/Sunk.jpg" alt="">
+                <a href="https://www.amazon.ca" target="blank" id="a8"><p id="swrap">Buy</p><img class='img-fluid' id="sunk" src="./Images/Sunk.jpg" alt=""></a>
             </div>
             <div class="col-12 col-sm-6 col-md-4 spacing">
                 <span>Where My Eyes Go</span>
-                <img class='img-fluid' src="./Images/Where My Eyes Go.jpg" alt="">
+                <a href="https://www.amazon.ca" target="blank" id="a9"><p id="wwrap">Buy</p><img class='img-fluid' id="whereMyEyesGo" src="./Images/Where My Eyes Go.jpg" alt=""></a>
             </div>
         </div>
 
     </div>
 
-    <script src="htImages://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script
+    src="http://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+    <script>
+        $('#fresh').hover(function() {
+            $(this).css('opacity', '0.6');
+            $('#fwrap').css('display', 'block')
+            },
+            function() {
+                $(this).css('opacity', '1');
+                $('#fwrap').css('display', 'none')
+            });
+        $('#joshua').hover(function() {
+            $(this).css('opacity', '0.6');
+            $('#jwrap').css('display', 'block')
+            },
+            function() {
+                $(this).css('opacity', '1');
+                $('#jwrap').css('display', 'none')
+            });
+        $('#monolith').hover(function() {
+            $(this).css('opacity', '0.6');
+            $('#mwrap').css('display', 'block')
+            },
+            function() {
+                $(this).css('opacity', '1');
+                $('#mwrap').css('display', 'none')
+            });        
+        $('#outThere').hover(function() {
+            $(this).css('opacity', '0.6');
+            $('#owrap').css('display', 'block')
+            },
+            function() {
+                $(this).css('opacity', '1');
+                $('#owrap').css('display', 'none')
+            });        
+        $('#path').hover(function() {
+            $(this).css('opacity', '0.6');
+            $('#pwrap').css('display', 'block')
+            },
+            function() {
+                $(this).css('opacity', '1');
+                $('#pwrap').css('display', 'none')
+            });
+        $('#risen').hover(function() {
+            $(this).css('opacity', '0.6');
+            $('#rwrap').css('display', 'block')
+            },
+            function() {
+                $(this).css('opacity', '1');
+                $('#rwrap').css('display', 'none')
+            }); 
+        $('#sl').hover(function() {
+            $(this).css('opacity', '0.6');
+            $('#slwrap').css('display', 'block')
+            },
+            function() {
+                $(this).css('opacity', '1');
+                $('#slwrap').css('display', 'none')
+            }); 
+        $('#sunk').hover(function() {
+            $(this).css('opacity', '0.6');
+            $('#swrap').css('display', 'block')
+            },
+            function() {
+                $(this).css('opacity', '1');
+                $('#swrap').css('display', 'none')
+            }); 
+        $('#whereMyEyesGo').hover(function() {
+            $(this).css('opacity', '0.6');
+            $('#wwrap').css('display', 'block')
+            },
+            function() {
+                $(this).css('opacity', '1');
+                $('#wwrap').css('display', 'none')
+            }); 
+    </script>
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

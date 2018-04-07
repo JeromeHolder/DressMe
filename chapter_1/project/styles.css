@@ -14,9 +14,6 @@ a.active {
 
 .spacing {
     margin: 20px auto;
-}
-
-#title {
     text-align: center;
 }
 
@@ -26,12 +23,34 @@ a.active {
 
 #about {
     position: absolute;
-    margin-top: 0%;
-    margin-left: 5%;
-    max-width: 250px;
+    margin-top: 10%;
+    margin-left: 10%;
+    max-width: 20%;
+    max-height: 50%;
     text-align: left;
 }
+/* 
+@media (max-width: 144px) {
+    #about {
+        font-size: 2em;
+    }
+} */
 
 #guitar {
     position: absolute;
+}
+
+#a1, #a2, #a3, #a4, #a5, #a6, #a7, #a8, #a9 {
+    position: relative;
+    display: block;
+}
+
+#fwrap, #jwrap, #mwrap, #owrap, #pwrap, #rwrap, #slwrap, #swrap, #wwrap {
+    position: absolute;
+    display: none;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-decoration: none;
 }
