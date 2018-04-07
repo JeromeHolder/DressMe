@@ -17,27 +17,9 @@ a.active {
     text-align: center;
 }
 
-#aboutimg {
-    position: relative;
-}
-
-#about {
-    position: absolute;
-    margin-top: 10%;
-    margin-left: 10%;
-    max-width: 20%;
-    max-height: 50%;
-    text-align: left;
-}
-/* 
-@media (max-width: 144px) {
-    #about {
-        font-size: 2em;
-    }
-} */
-
-#guitar {
-    position: absolute;
+#about {  
+    text-align: center;
+    margin: 0% 2.5%;
 }
 
 #a1, #a2, #a3, #a4, #a5, #a6, #a7, #a8, #a9 {
