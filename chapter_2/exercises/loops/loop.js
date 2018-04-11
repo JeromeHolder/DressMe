@@ -20,7 +20,7 @@ for (var i = 1; i < arr1.length; i++) {
     if (arr1[i] > arr1[0]) {
         x = arr1[i];
     } else {
-        x = arr1[0];
+        x = arr1[0]; // this else may not be necessary
     }
 }
 console.log(x);

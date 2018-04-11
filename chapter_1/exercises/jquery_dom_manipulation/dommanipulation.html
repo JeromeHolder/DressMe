@@ -151,5 +151,31 @@
 	<script type="text/javascript" src="js/vendor/jquery-1.12.2.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 
+	<script>
+		// new way for document ready --> $(function() {})
+		// perhaps less clear because 'ready' doesn't appear in the syntax
+		$(document).ready(function() {
+			$('#edit-header').text('The jQuery Challenge \\m/');
+			$('#box1').css('background', 'green');
+			$('#para1').css('font-size', '24px').css('font-weight', 'bold');
+			$('.box2').addClass('spin');
+			$('#button1').click(function() {
+				alert("The button has been clicked");
+			});
+			$('#box3').hover(function() {
+				$('#box3').css('background', 'green');
+				},
+				function () {
+				$('#box3').css('background', 'red');
+			});
+			$('#input1').keydown(function() {
+				var text = $('#input1').val();
+				console.log(text);
+			});
+			$('#box4').click(function(){
+				$('#box4').animate({'marginLeft': '+=398px', 'marginTop': '+=149px'}, 2000);
+			});
+		});
+	</script>
 </body>
 </html>
