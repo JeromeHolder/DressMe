@@ -17,7 +17,6 @@ function getMaxFromUser() {
 function generateRandomNumber(number) {
     let max = Math.floor(number);
     let randomNum = Math.floor(Math.random() * (max));
-    console.log("randomNum = " + randomNum);
     return randomNum;
 }
 
@@ -51,6 +50,7 @@ function playAgain(randomNum) {
         return true;
     } 
     else {
+        console.log("Thanks for playing.");
         return false;
     }
 }
@@ -60,16 +60,24 @@ function startGame() {
     getName();
     gameLoop();
     function gameLoop() {
+        let score = 20;
+        let oldScore = 0;
         let Max = getMaxFromUser();
         if (Max !== 0) {
             let rnd = generateRandomNumber(Max);
             let userGuess = getGuessFromUser(rnd, Max);
             let guessCorrect = false;
             while (!isGuessCorrect(userGuess, rnd)) {
+                score = score - 1;
                 userGuess = Number(readlineSync.questionInt("Try again: ", {limitMessage:'That is invalid.'}));
             }
             if (playAgain(rnd)) {
+                console.log("Your score for this game is: " + score + "\nYour previous score was: " + oldScore);
+                oldScore = oldScore + score;
                 gameLoop();
+            }
+            else {
+                console.log("Your score for this game is: " + score);
             }
         }
     }
