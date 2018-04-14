@@ -63,7 +63,7 @@ function startGame() {
         let score = 20;
         let oldScore = 0;
         let Max = getMaxFromUser();
-        if ((Max !== 0) && (!Max < 0)) {
+        if ((Max !== 0) && (Max > 0)) {
             let rnd = generateRandomNumber(Max);
             let userGuess = getGuessFromUser(rnd, Max);
             let guessCorrect = false;
