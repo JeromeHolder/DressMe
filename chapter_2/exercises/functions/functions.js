@@ -51,10 +51,22 @@ const PERSONDATA = [{
     score:19
 }]
 
-search("James",PERSONDATA)  // Should log that James was found at position #5
-search("Eric",PERSONDATA)   // Should log that Eric was not found.
+// console.log(nameSearch("James",PERSONDATA));  // Should log that James was found at position #5
 
-console.log(filter(PERSONDATA, 50)) // Should display an array of everyone with a score greater than 50
+// function nameSearch(named, arr) {
+//     for(var i = 0; i < arr.length; i++) {
+//         if (arr[i].name === named) {
+//             return named + " was found at position " + i;
+//         }
+//         else {
+//             return named + " was not found";  
+//             //if i comment the else out it will return the index correctly and undefined otherwise
+//         }
+//     }
+// }
+// search("Eric",PERSONDATA)   // Should log that Eric was not found.
+
+// console.log(filter(PERSONDATA, 50)) // Should display an array of everyone with a score greater than 50
 /* Ex:
 [ { name: 'Alex', rank: 3, age: 34, score: 75 },
   { name: 'Isabella', rank: 1, age: 31, score: 100 },
@@ -66,3 +78,15 @@ console.log(filter(PERSONDATA, 50)) // Should display an array of everyone with 
 /*
     Write your functions below.
 */
+
+console.log(filter(PERSONDATA, 45));
+
+function filter(arr, x) {
+    let filtered = [];
+    for(var i = 0; i < arr.length; i++) {
+        if (arr[i].score < x) {
+            filtered.push(arr[i]);
+        }
+    }
+    return filtered;
+}

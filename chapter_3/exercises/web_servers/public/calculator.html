@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="calculator.css">
+
+</head>
+<body>
+    
+    <div class="container">
+
+        <div class="inner-container">
+
+            <h1>Our Cereal Calculator</h1>
+
+            <form id="calculator">
+
+                <select name="cereal">
+                    <option value="cheerios">Cheerios</option>
+                    <option value="miniwheats">Mini-wheats</option>
+                </select>
+
+                <input id="serving" type="text" name="serving" placeholder="How much you're having">
+
+                <button type="submit">Calculate!</button>
+
+            </form>
+
+            <div class="flex">
+
+                <div class="item" id="sugar">
+                    <span>Sugar</span>
+                    <p></p>
+                </div>
+
+                <div class="item" id="protein">
+                    <span>Protein</span>
+                    <p></p>
+                </div>
+
+                <div class="item" id="fibre">
+                    <span>Fibre</span>
+                    <p></p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+    <script src="calculator.js"></script>
+
+</body>
+</html>

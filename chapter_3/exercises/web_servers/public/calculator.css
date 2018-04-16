@@ -1,0 +1,54 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin : 0;
+}
+
+.container {
+    width : 100vw;
+    height : 100vh;
+    background-image : url('breakfast.jpg');
+    background-size : cover;
+    background-position : center;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+}
+
+.inner-container {
+    background-color : rgba(255, 255, 255, 0.85);
+    width : 800px;
+    padding : 50px;
+    text-align:center;
+}
+
+h1 {
+    font-size : 36px;
+}
+
+.flex {
+    display : flex;
+    justify-content: center;
+}
+
+select, input {
+    padding : 5px;
+    font-size : 22px;
+    margin : 20px;
+}
+
+input[type="submit"] {
+    font-size : 30px;
+}
+
+.item {
+    margin : 0 50px;
+}
+
+.item span {
+    font-size : 20px;
+}
+
+.item p {
+    font-size : 50px;
+    margin : 0;
+}

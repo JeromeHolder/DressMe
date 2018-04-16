@@ -24,6 +24,21 @@ PART 1
 
 Write the pseudocode that represents your game logic here.
 
+choose random word -> store in memory
+print length of random word to user
+prompt guess letter
+guessed letters are compared to random chosen
+wrong guesses stored in new array
+wrong guess reduces number of available guesses
+correct guess displayed
+game continues until word is complete or no more guesses are available
+
+
+select random word from array
+split random chosen word into array
+loop through array for matches .match()
+
+
 */
 
 function startGame() {
