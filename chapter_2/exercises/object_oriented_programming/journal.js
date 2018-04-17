@@ -14,26 +14,23 @@ Journal.prototype.addEntry = function(Entries) {
 };
 
 Journal.prototype.formatEntry = function(entry) {
+    console.log(entry)
     return `<article>
         <h3> ${entry.title} </h3>
         <p> ${entry.content} </p>
         <p> ${entry.author} </p>
     </article>`;
-}
+};
 
 Journal.prototype.displayEntries = function() {
     console.log(this.name);
-    // for(let i = 0; i < this.entry.length; i++) {
-    //     console.log(this.entry[i]);
-    // }
     var parent = $('#past');
-    this.entry.forEach(function(entry) {
-        // console.log(entry);
-        // var parent = $('#past');
-        // console.log(parent);
-        parent.append(this.formatEntry(entry));
+    this.entry.forEach(function(entry) {        
+        parent.append(Journal.prototype.formatEntry(entry));
     });
 };
+
+
 
 // const entry1 = new Entries(
 //     'First',
@@ -48,11 +45,6 @@ Journal.prototype.displayEntries = function() {
 // );
 
 const myJournal = new Journal('Jerome');
-
-// myJournal.addEntry(entry1);
-// myJournal.addEntry(entry2);
-
-// myJournal.displayEntries();
 
 $(document).ready(function(e) {
     $('#entry').submit(function(e){
