@@ -79,14 +79,24 @@ const PERSONDATA = [{
     Write your functions below.
 */
 
-console.log(filter(PERSONDATA, 45));
+// console.log(filter(PERSONDATA, 45));
 
-function filter(arr, x) {
-    let filtered = [];
-    for(var i = 0; i < arr.length; i++) {
-        if (arr[i].score < x) {
-            filtered.push(arr[i]);
-        }
-    }
-    return filtered;
-}
+// function filter(arr, x) {
+//     let filtered = [];
+//     arr.forEach(function(person){
+//         if(person.score < x) {
+//             filtered.push(person);
+//         }
+//     })
+//     // for(var i = 0; i < arr.length; i++) {
+//     //     if (arr[i].score < x) {
+//     //         filtered.push(arr[i]);
+//     //     }
+//     // }
+//     return filtered;
+// }
+
+const result = PERSONDATA.filter(item => item.score < 45);
+console.log(result);
+
+// console.log(PERSONDATA[0].score);

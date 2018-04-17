@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Journal</title>
+</head>
+<body>
+    
+     <h1 id="name"> My Journal</h1>
+     <form id="past">
+        <button type="submit" id="displayentries">Display Past Entries</button>
+     </form>
+    
+     <div>
+        <form id="entry">
+            <p><input type="text" name="titleinput" id="titleinput" placeholder="Entry title"></p>
+            <p><textarea name="contentinput" id="contentinput" cols="30" rows="10"></textarea></p>
+            <p><input type="text" name="authorinput" id="authorinput" placeholder="Author"></p>
+            <button type="submit">Submit Journal Entry</button>
+            <p id="submitmessage"></p>
+        </form>
+     </div>
+
+
+
+
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="journal.js"></script>
+</body>
+</html>
