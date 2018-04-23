@@ -7,9 +7,18 @@
   <body>
     <h1>Hello movies!</h1>
 
-    <% for (let i = 0; i < movies.length; i++) { %>
-        <p><%= movies[i].title %></p>
-        <p><%= movies[i].plot %></p>
+    <% for (let i = 0; i < results.length; i++) { %>
+      <div class="media">
+        <div class="media-left media-middle">
+          <a href="#">
+            <img class="media-object" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/<%= results[i].poster_path %>" alt="...">
+          </a>
+        </div>
+        <div class="media-body">
+          <a href="http://localhost:8080/movie/<%= results[i].id %>"><h4 class="media-heading"><p><%= results[i].title %></p></h4></a>
+          <p><%= results[i].overview %></p>
+        </div>
+      </div> 
     <% }; %>
 
     
