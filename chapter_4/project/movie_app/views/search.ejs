@@ -1,12 +1,12 @@
 <html>
 <head>
-  <title>Movie Database</title>
+  <title>Search Results</title>
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Movie Database</a>
+    <a class="navbar-brand" href="/">Movie Database</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -14,7 +14,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
       </ul>
       <form action="/search" method="GET" class="form-inline my-2 my-lg-0">
@@ -26,13 +26,15 @@
 
 
   <h1>Movie Database</h1>
-  <h3>Current Popular Movies</h3>
+  <h3>Search results for: <%= searchTerm %></h3>
+
+  <!-- add an if statement to display a message if there are no results -->
 
   <% for (let i = 0; i < results.length; i++) { %>
     <div class="media">
       <div class="media-left media-middle">
         <a href="/movie/<%= results[i].id %>">
-          <img class="media-object img-fluid" onerror="this.src='No_Image__placeholder.png';" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/<%= results[i].poster_path %>" alt="Image not found">
+          <img class="media-object img-fluid" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/<%= results[i].poster_path %>" onerror="this.src='No_Image__placeholder.png';" alt="Image not found">
         </a>
       </div>
       <div class="media-body">
