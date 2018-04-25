@@ -5,11 +5,13 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 let popurl = 'https://api.themoviedb.org/3/movie/popular?api_key=1f39c18e7001daed72e0a151db90566a&language=en-US&page=1'
+let popresults = {};
 request(popurl, (error, res, body) => {
     if (error) {
         console.log(error);
     }
     else {
+        popresults = JSON.parse(body);
         app.get('/', (req, res) => {res.render('index', JSON.parse(body));})
     }
 });
@@ -37,6 +39,10 @@ app.get('/search', (req, res) => {
             res.render('search', movieData);
         }
     })
+})
+
+app.get('*', (req, res) =>{
+    res.render('index', popresults);
 })
 
 app.listen(8080, () => {console.log('Server started on http://localhost:8080\nPress CTRL + C to stop server');});

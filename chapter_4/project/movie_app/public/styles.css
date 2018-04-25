@@ -1,5 +1,10 @@
-.backLink, .backLink:hover {
-    color: white;
-    text-decoration: none;
+.titlelink {
+    color: inherit;
 }
 
+/* repeat styling
+m-3 ml-5 pb-3 border-bottom on media divs on search and index
+
+m-3 ml-5 pb-3 border-bottom on every detail on movie
+
+*/

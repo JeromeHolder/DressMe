@@ -24,30 +24,40 @@
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <button class="btn btn-light btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>
     </nav>
     <div class="media">
-      <div class="media-left media-middle">
+      <div class="media-left media-middle m-3">
         <a href="#">
           <img class="media-object img-fluid" onerror="this.src='No_Image__placeholder.png';" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/<%= poster_path %>" alt="Image not found">
         </a>
       </div>
-      <div class="media-body">
-        <h4 class="media-heading"><p><%= title %></p></h4>
-        <h6>Overview</h6>
-        <p><%= overview %></p>
-        <h6>Genre(s)</h6>
-        <% for (let i = 0; i < genres.length; i++) { %>
-            <p><%= genres[i].name %></p>
-        <% }; %>
-        <h6>Runtime</h6>
-        <p><%= runtime %></p>
-        <h6>Release Date</h6>
-        <p><%= release_date %></p>
-        <h6>Official Page</h6>
-        <p><a href="<%= homepage %>" target="blank"><%= homepage %></a></p>
+      <div class="media-body m-1">
+        <h4 class="media-heading m-3 ml-5 pb-3 border-bottom"><p><%= title %></p></h4>
+        <div class="m-3 ml-5 pb-3 border-bottom">
+          <h6>Overview</h6>
+          <p><%= overview %></p>
+        </div>
+        <div class="m-3 ml-5 pb-3 border-bottom">
+          <h6>Genre(s)</h6>
+          <% for (let i = 0; i < genres.length; i++) { %>
+              <p style="display: inline-block"><%= genres[i].name %></p>
+          <% }; %>
+        </div>
+        <div class="m-3 ml-5 pb-3 border-bottom">
+          <h6>Runtime</h6>
+          <p><%= runtime %></p>
+        </div>
+        <div class="m-3 ml-5 pb-3 border-bottom">  
+          <h6>Release Date</h6>
+          <p><%= release_date %></p>
+        </div>
+        <div class="m-3 ml-5 pb-3 border-bottom">
+          <h6>Official Page</h6>
+          <p><a href="<%= homepage %>" target="blank"><%= homepage %></a></p>
+        </div>
       </div>
     </div> 
   </div>
