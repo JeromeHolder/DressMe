@@ -2,9 +2,12 @@
     color: inherit;
 }
 
-/* repeat styling
-m-3 ml-5 pb-3 border-bottom on media divs on search and index
+body{
+    background-position:center;
+    background-image:url(./background.jpg);
+    background-attachment: fixed;
+}
 
-m-3 ml-5 pb-3 border-bottom on every detail on movie
-
-*/
+.textcolor {
+    color: white;
+}

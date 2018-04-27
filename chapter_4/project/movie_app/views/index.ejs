@@ -1,17 +1,21 @@
 <html>
 <head>
-  <title>Movie Database</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Movie Database - Popular</title>
   <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/fromsass.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 </head>
-<body>
+<body class="textcolor">
   <div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
       <a class="navbar-brand" href="#">Movie Database</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-    
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -20,26 +24,30 @@
         </ul>
         <form action="/search" method="GET" class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchTerm">
-          <button class="btn btn-light btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+          <button class="btn btn-dark btn-outline-light my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>
     </nav>
     
-    <h3 class="text-center">Current Popular Movies</h3>
-
-    <% for (let i = 0; i < results.length; i++) { %>
-      <div class="media m-3 ml-5 pb-3 border-bottom">
-        <div class="media-left media-middle ">
-          <a href="/movie/<%= results[i].id %>">
-            <img class="media-object img-fluid" onerror="this.src='No_Image__placeholder.png';" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/<%= results[i].poster_path %>" alt="Image not found">
-          </a>
-        </div>
-        <div class="media-body m-3 ">
-          <a class="titlelink" href="/movie/<%= results[i].id %>"><h4 class="media-heading"><p><%= results[i].title %></p></h4></a>
-          <p><%= results[i].overview %></p>
-        </div>
-      </div> 
-    <% }; %>
+    <!-- Main section -->
+    <main class="mainMargins">
+      <h3 class="text-center">Current Popular Movies</h3>
+      <!-- Loops through results to populate page with movies from /popular -->
+      <% for (let i = 0; i < results.length; i++) { %>
+        <div class="media m-3 ml-5 pb-3 border-bottom">
+          <div class="media-left media-middle ">
+            <a href="/movie/<%= results[i].id %>">
+              <img class="media-object img-fluid" onerror="this.src='No_Image__placeholder.png';" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/<%= results[i].poster_path %>" alt="Image not found">
+            </a>
+          </div>
+          <div class="media-body m-3">
+            <!-- Dynamic link uses movie ID as query -->
+            <a class="titlelink" href="/movie/<%= results[i].id %>"><h4 class="media-heading"><p><%= results[i].title %></p></h4></a>
+            <p><%= results[i].overview %></p>
+          </div>
+        </div> 
+      <% }; %>
+    </main>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
