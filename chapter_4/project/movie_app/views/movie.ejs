@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><%= title %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="/fromsass.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 </head>
 <body class="textcolor">
   <div class="container-fluid">
@@ -22,6 +22,9 @@
           <li class="nav-item active">
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/popular">Popular <span class="sr-only">(current)</span></a>
+          </li>
         </ul>
         <form action="/search" method="GET" class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchTerm">
@@ -32,40 +35,38 @@
 
     <!-- Main section -->
     <div class="media mainMargins">
-      <div class="media-left media-middle m-3">
-        <a href="#">
+      <div class="media m-3">
           <img class="media-object img-fluid" onerror="this.src='No_Image__placeholder.png';" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/<%= poster_path %>" alt="Image not found">
-        </a>
       </div>
       <!-- Movie Details -->
       <div class="media-body m-1">
-        <h4 class="media-heading m-3 ml-5 pb-3 border-bottom"><p><%= title %></p></h4>
-        <div class="m-3 ml-5 pb-3 border-bottom">
+        <h4 class="media-heading movieDetails border-bottom"><p><%= title %></p></h4>
+        <div class="movieDetails border-bottom">
           <h6>Overview</h6>
           <p><%= overview %></p>
         </div>
-        <div class="m-3 ml-5 pb-3 border-bottom">
+        <div class="movieDetails border-bottom">
           <h6>Genre(s)</h6>
           <% for (let i = 0; i < genres.length; i++) { %>
               <p style="display: inline-block"><%= genres[i].name %></p>
           <% }; %>
         </div>
-        <div class="m-3 ml-5 pb-3 border-bottom">
+        <div class="movieDetails border-bottom">
           <h6>Runtime</h6>
           <p><%= runtime %> Minutes</p>
         </div>
-        <div class="m-3 ml-5 pb-3 border-bottom">  
+        <div class="movieDetails border-bottom">  
           <h6>Release Date</h6>
           <p><%= release_date %></p>
         </div>
-        <div class="m-3 ml-5 pb-3 border-bottom">
+        <div class="movieDetails border-bottom">
           <h6>Official Page</h6>
           <p><a href="<%= homepage %>" target="blank"><%= homepage %></a></p>
         </div>
-        <div class="m-3 ml-5 pb-3 border-bottom">
-          <!-- iframe for trailer -->
+        <!-- iframe for trailer -->
+        <div class="movieDetails border-bottom iframe-container">
           <h6>Trailer</h6>
-          <iframe width="854" height="480" src="https://www.youtube.com/embed/<%= videos.results[0].key %>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <iframe class="resp-iframe" width="854" height="480" src="https://www.youtube.com/embed/<%= videos.results[0].key %>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
       </div>
     </div> 
