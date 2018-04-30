@@ -23,26 +23,44 @@ const cards = [
   }
 ]
 
-class App extends Component {
+
+class Card extends React.Component { 
+  render () {
+    return (
+        <div className="col s4">
+          <div className="card">
+            <div className="card-image">
+              <img src={this.props.imagesrc} />
+              <span className="card-title">{this.props.title}</span>
+            </div>
+            <div className="card-content">
+              <p>Powering the next generation of creators. Build your skills in business, design &amp; technology.</p>
+            </div>
+          </div>
+        </div>
+    )
+  }
+}
+
+class App extends React.Component {
 
   render() {
 
+    let cardSet = [];
+    for(let i=0; i < cards.length; i++){
+      cardSet.push(<Card title={cards[i].title} imagesrc={cards[i].imgSrc}/>);
+    }
+
     return (
       <div className="container">
-          Your Code here 
+        <h1>BrainStaGram</h1>
+        <div className="row">
+          {cardSet}
+        </div>
       </div>
       
     );
   }
 }
-
-class Card extends Component { 
-  render () {
-    return (
-      //your code here
-    )
-  }
-}
-
 
 export default App;
