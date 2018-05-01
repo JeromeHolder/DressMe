@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Todo from './todo';
+import Todo from './Todo';
+import Form from './Form';
 
 class App extends Component {
   render() {
@@ -10,15 +11,11 @@ class App extends Component {
         <h1 className="text-center">todos</h1>
     
         <form>
-            <div className="input-group">
-                <span className="input-group-btn">
-                    <button className="btn btn-primary" type="submit">Add</button>
-                </span>
-                <input className="form-control" placeholder="add a todo" />
-            </div>
+            <Form />
         </form>
+
         <ul className="list-group">
-            <Todo listContent="Test" />
+            <Todo listContent="Test" completed={true}/>
         </ul>
       
         <select>
