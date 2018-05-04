@@ -2,3 +2,18 @@
   text-decoration: line-through;
   color: grey;
 }
+
+.titleColor{
+  color: white;
+}
+
+body {
+  background: linear-gradient(rgb(88, 10, 190) 10%, rgb(52, 158, 172)90%) no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+
+.btnColor{
+  background: linear-gradient(rgb(88, 10, 190) 10%, rgb(52, 158, 172)90%) no-repeat center center fixed;
+}

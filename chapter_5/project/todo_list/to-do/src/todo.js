@@ -1,28 +1,12 @@
 import React from 'react';
 
-class Todo extends React.Component{
-    constructor(){
-        super();
-        this.state = {
-            complete: false
-        }
-        this.setComplete = this.setComplete.bind(this)
-    }
-
-    setComplete(){
-        this.setState({
-            complete: !this.state.complete
-        })
-    }
-
-    render(){
+export default class Todo extends React.Component {
+    render() {
         return (
             <li className="list-group-item">
-                <input type="checkbox" checked={this.state.complete} onChange={this.setComplete}/>
-                <label className={ (this.state.complete) ? 'done':'' }>{this.props.listContent}</label>
+                <input type="checkbox" checked={this.props.complete} onChange={()=>{this.props.setComplete(this.props.index)}}/>
+                <label className={ (this.props.complete) ? 'done':'' }>{this.props.content}</label>
             </li>
-        )
+        );
     }
 }
-
-export default Todo;
