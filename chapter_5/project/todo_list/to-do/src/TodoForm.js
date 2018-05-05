@@ -31,7 +31,7 @@ export default class TodoForm extends React.Component{
                     <span className="input-group-btn">
                         <button disabled={this.state.content.length === 0 ? true : false} className="btn btn-primary btnColor" type="submit">Add</button>
                     </span>
-                    <input type="text" onChange={this.updateContent} className="form-control" placeholder="Enter your task" value={this.state.content} />
+                    <input type="text" onChange={this.updateContent} className="form-control" placeholder="Enter your task" value={this.state.content} /> {/* I could also use 'required' to validate the input instead of the controlled component */}
                 </div>
             </form>
         )

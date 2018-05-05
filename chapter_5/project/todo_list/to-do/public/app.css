@@ -17,3 +17,8 @@ body {
 .btnColor{
   background: linear-gradient(rgb(88, 10, 190) 10%, rgb(52, 158, 172)90%) no-repeat center center fixed;
 }
+
+.countermargins{
+  margin-left: 25%;
+  margin-right: 25%;
+}
