@@ -26,24 +26,23 @@ export default class App extends Component {
       // Default state for the filter
       filter: 'all'
     };
-
-    // Method bindings
-    this.setComplete = this.setComplete.bind(this);
-    this.addTodo = this.addTodo.bind(this);
-    this.clearComplete = this.clearComplete.bind(this);
-    this.checkClearState = this.checkClearState.bind(this);
-    this.setFilter = this.setFilter.bind(this);
+    // Method bindings removed because I changed my methods to arrow functions
+    // this.setComplete = this.setComplete.bind(this);
+    // this.addTodo = this.addTodo.bind(this);
+    // this.clearComplete = this.clearComplete.bind(this);
+    // this.checkClearState = this.checkClearState.bind(this);
+    // this.setFilter = this.setFilter.bind(this);
   }
 
   // onChange handler that changes state needed for the filter conditions in render()
-  setFilter(selected){
+  setFilter = selected => {
     this.setState({
       filter: selected.target.value
     })
   }
 
   // Tests the presence of completed items and changes state accordingly
-  checkClearState(){
+  checkClearState = () => {
     if(this.state.todos.find(i => i.complete === true)){
       this.setState({
         clearButtonDisabled: false
@@ -57,18 +56,17 @@ export default class App extends Component {
   }
 
   // onChange handler called from Todo
-  setComplete(i){
+  setComplete = i => {
     let copy = Array.from(this.state.todos);
     copy[i].complete = !this.state.todos[i].complete;
     this.setState({
       todos: copy
-    });
-    // Calls the function to disable/enable the clear complete button when items are toggled completed/active
-    this.checkClearState();
+    }, ()=>this.checkClearState());
+    // Above callback calls the function to disable/enable the clear complete button when items are toggled completed/active
   }
 
   // Called from TodoForm to add new items to the list of todos in state
-  addTodo(content){
+  addTodo = content => {
     let newTodo = {
       content: content,
       complete: false
@@ -81,7 +79,7 @@ export default class App extends Component {
   }
 
   // Click handler for the Clear Complete button
-  clearComplete(e){
+  clearComplete = e => {
     e.preventDefault();
     let copy = this.state.todos.filter((copyTodos) => {
       return copyTodos.complete === false;
@@ -94,7 +92,6 @@ export default class App extends Component {
   }
 
   render() {
-
     // Filters the list of todos in state and returns a new array without altering state
     // New array is passed to TodoList
     let filteredListJSX = [];
@@ -111,7 +108,6 @@ export default class App extends Component {
     else {
       filteredListJSX = this.state.todos
     }
-
 
     return (
       <div className="container">
