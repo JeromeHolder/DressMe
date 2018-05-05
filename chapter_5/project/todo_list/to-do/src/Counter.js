@@ -2,6 +2,7 @@ import React from 'react';
 
 export default class Counter extends React.Component{
     render(){
+        // These three variables count the number of list items
         let allJSX = this.props.listContent.length;
         let activeJSX = this.props.listContent.reduce((acc, cur) => {
             if(cur.complete === false){
@@ -13,11 +14,6 @@ export default class Counter extends React.Component{
         },0)
         let completeJSX = allJSX-activeJSX;
         return (
-            // <div className="text-center">
-            //     <h3 className='display rounded border border-dark'>All {allJSX}</h3>
-            //     <h3 className='display rounded border border-dark'>Active {activeJSX}</h3>
-            //     <h3 className='display rounded border border-dark'>Complete {completeJSX}</h3>
-            // </div>
             <div>
                 <ul className="list-group d-flex countermargins">
                     <li role="presentation" className="list-group-item d-flex justify-content-between align-items-center">

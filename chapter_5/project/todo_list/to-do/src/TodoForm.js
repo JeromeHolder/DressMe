@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default class TodoForm extends React.Component{
+    // Constructor to set up a controlled component to enable/disable the add button
     constructor(){
         super();
         this.state ={
@@ -16,6 +17,7 @@ export default class TodoForm extends React.Component{
         });
     }
 
+    // Click handler that calls the addTodo function
     grabTodo(e){
         e.preventDefault();
         this.props.addTodo(this.state.content);
