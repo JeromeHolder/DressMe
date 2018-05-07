@@ -13,4 +13,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6cbe917029fcd972e35d957df8095f5d78066d77
