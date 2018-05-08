@@ -7,3 +7,13 @@ ul{
   list-style: none;
   text-align: center
 }
+
+.cardWidth{
+  width: 18rem;
+}
+.card {
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 3%;
+  margin-top: 3%
+}
