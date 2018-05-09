@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Switch, Link} from 'react-router-dom';
+import {Route, Switch, Link, Redirect} from 'react-router-dom';
 import axios from 'axios';
 import Hats from './Hats';
 import Shoes from './Shoes';
@@ -16,12 +16,13 @@ export default class Shop extends React.Component{
     }
 
     // Gets catalogue of items from server
-    componentWillMount(){
+    componentDidMount(){
         axios.get('http://localhost:8080/catalogue')
              .then(result => {
                  this.setState({
                     shoes: result.data.shoes,
-                    hats: result.data.hats
+                    hats: result.data.hats,
+                    cart: result.data.cart
                  })
              })
              .catch(error => {
@@ -44,6 +45,10 @@ export default class Shop extends React.Component{
     }
 
     render(){
+        // Redirects to homepage if user not logged in
+        if(!localStorage.userName){
+            return <Redirect to='/' />;
+        }
         return (
             <div>
                 <h1>Shop</h1>

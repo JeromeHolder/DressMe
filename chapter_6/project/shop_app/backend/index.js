@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
-app.use( bodyParser.json() );
+// const bodyParser = require('body-parser');
+// app.use( bodyParser.json() );
 app.use(express.json());
 
 // Allows CORS
@@ -51,15 +51,14 @@ let catalogue = {
             picture: '/topHat.jpg',
             type: 'hat'
         }
-    ]
+    ],
+    cart: []
 }
-
-let cart = []
 
 // Grabs item added to cart and sends back updated cart
 app.post('/cart', (req, res) => {
-    cart.push(req.body.item);
-    res.json(cart);
+    catalogue.cart.push(req.body.item);
+    res.json(catalogue.cart);
 })
 
 // Sends catalogue to shop
