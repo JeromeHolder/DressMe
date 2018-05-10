@@ -44,6 +44,18 @@ export default class Shop extends React.Component{
              })
     }
 
+    clearCart = () => {
+        axios.post('http://localhost:8080/clearCart')
+            .then(result => {
+                this.setState({
+                    cart: result.data
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
     render(){
         // Redirects to homepage if user not logged in
         if(!localStorage.userName){
@@ -62,6 +74,8 @@ export default class Shop extends React.Component{
                     <Route path='/shop/shoes' render={ ()=>{return <Shoes shoes={this.state.shoes} addToCart={this.addToCart}/>}} />
                 </Switch>
                 <Cart cart={this.state.cart}/>
+                <button onClick={this.props.logout}>Logout</button>
+                <button onClick={this.clearCart}>Clear Cart</button>
             </div>
         )
     }

@@ -66,4 +66,9 @@ app.get('/catalogue', (req, res) => {
     res.json(catalogue);
 })
 
+app.post('/clearCart', (req, res) => {
+    catalogue.cart = [];
+    res.json(catalogue.cart);
+})
+
 app.listen(8080, ()=>{console.log("Server running on port 8080")});
