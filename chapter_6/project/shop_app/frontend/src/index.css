@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-image: url('/woodBack.jpg');
 }
 .cardWidth{
   width: 18rem;
@@ -12,3 +13,98 @@ body {
   margin-bottom: 3%;
   margin-top: 3%
 }
+
+input{
+  text-align:center;
+}
+
+.btn{
+  display: block;
+  margin-top: 1%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.jumbotron {
+  background-image: url("/jumbotronback.jpg");
+  background-size: cover;
+  padding: 14rem;
+}
+
+.jumbotext {
+  color: white;
+  -webkit-text-stroke: 1px black;
+}
+
+.navtextcolor{
+  color: white;
+}
+
+.sidenavdisplay{
+  display: block;
+}
+
+.container {
+  display: table;
+  margin-left: 0%;
+  padding-left: 0%;
+  position: relative;
+  height: 90vh;
+  max-height: 90vh;
+}
+.main {
+  display: table-cell;
+  padding-left: 5%;
+  padding-top: 3%;
+  vertical-align: top;
+  position: relative;
+}
+.sidenav {
+  display: table-cell;
+  position: relative;
+  background-color: gray;
+  color: white;
+  padding-top: 2%;
+  width: 15%;
+  min-width: 115px;
+} 
+
+.sidenavlinks{
+  position: sticky;
+  top:0;
+}
+.cart{
+  position: sticky;
+  top:20%;
+  margin-top: 90%;
+  margin-bottom: 165%; 
+}
+
+.logout{
+  position: sticky;
+  top:60%;
+  margin-bottom: 3%;
+}
+
+img{
+  max-width: 286px;
+  max-height: 180px;
+}
+
+@media (max-width: 590px){
+  .jumbotron{
+    padding: 3rem;
+  }
+}
+
+.sidelinkheading{
+  padding-top: 5%;
+  padding-bottom: 0%;
+  margin-bottom: 0%;
+  text-decoration: underline;
+}
+
+/* .navbar-toggler-icon{
+  color: white;
+} */

@@ -34,13 +34,16 @@ export default class Home extends React.Component{
         }
         else {
             return (
-                <div>
-                    <h1>Home</h1>
-                    <form onSubmit={this.textGrab}>
-                        <h2>Enter your name</h2>
-                        <input onChange={this.buttonValidate} type="text" placeholder='User Name' ref={(input) => this.input = input}/>
-                        <button disabled={this.state.textInput.length === 0 ? true : false} type='submit'>Enter</button>
-                    </form>
+                <div className="jumbotron img-fluid">
+                    <div className="container-fluid">
+                        <h1 className="display-4 jumbotext">Welcome to the P@RE Online Store</h1>
+                        <h2 className="jumbotext">Login to access the store</h2>
+                        <hr className="my-4"/>
+                        <form onSubmit={this.textGrab}>
+                            <input onChange={this.buttonValidate} type="text" placeholder='User Name' ref={(input) => this.input = input}/>
+                            <button className="btn btn-outline-primary" disabled={this.state.textInput.length === 0 ? true : false} type='submit'>Login</button>
+                        </form>
+                    </div>
                 </div>
             )
         }

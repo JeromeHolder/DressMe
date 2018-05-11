@@ -44,6 +44,7 @@ export default class Shop extends React.Component{
              })
     }
 
+    // Removes items in cart
     clearCart = () => {
         axios.post('http://localhost:8080/clearCart')
             .then(result => {
@@ -62,20 +63,26 @@ export default class Shop extends React.Component{
             return <Redirect to='/' />;
         }
         return (
-            <div>
-                <h1>Shop</h1>
-                <h3>Welcome {this.props.userName}</h3>
-                <nav>
-                    <Link to='/shop/hats'>Hats</Link>
-                    <Link to='/shop/shoes'>Shoes</Link>
-                </nav>
-                <Switch>
-                    <Route path='/shop/hats' render={ ()=>{return <Hats hats={this.state.hats} addToCart={this.addToCart}/>}} />
-                    <Route path='/shop/shoes' render={ ()=>{return <Shoes shoes={this.state.shoes} addToCart={this.addToCart}/>}} />
-                </Switch>
-                <Cart cart={this.state.cart}/>
-                <button onClick={this.props.logout}>Logout</button>
-                <button onClick={this.clearCart}>Clear Cart</button>
+            <div className="container">
+                <div className="sidenav">
+                    <h5>Welcome {this.props.userName}!</h5>
+                    <nav className="sidenavlinks">
+                        <p className="sidelinkheading">Sections</p>
+                        <Link className="sidenavdisplay navtextcolor" to='/shop/hats'>Hats</Link>
+                        <Link className="sidenavdisplay navtextcolor" to='/shop/shoes'>Shoes</Link>
+                    </nav>
+                    <div className="cart">
+                        <Cart cart={this.state.cart}/>
+                        <button className="btn btn-dark" onClick={this.clearCart}>Clear Cart</button>
+                    </div>
+                    <button className="btn btn-dark logout" onClick={this.props.logout}>Logout</button>
+                </div>
+                <div className="main">
+                    <Switch>
+                        <Route path='/shop/hats' render={ ()=>{return <Hats hats={this.state.hats} addToCart={this.addToCart}/>}} />
+                        <Route path='/shop/shoes' render={ ()=>{return <Shoes shoes={this.state.shoes} addToCart={this.addToCart}/>}} />
+                    </Switch>
+                </div>
             </div>
         )
     }

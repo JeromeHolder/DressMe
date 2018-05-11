@@ -1,7 +1,5 @@
 const express = require('express');
 const app = express();
-// const bodyParser = require('body-parser');
-// app.use( bodyParser.json() );
 app.use(express.json());
 
 // Allows CORS
@@ -30,6 +28,24 @@ let catalogue = {
             price: 150,
             picture: '/dress.jpg',
             type: 'shoe'
+        },
+        {
+            name: 'High-heels',
+            price: 130,
+            picture: '/high-heels.jpg',
+            type: 'shoe'
+        },
+        {
+            name: 'Sandals',
+            price: 40,
+            picture: '/sandals.jpg',
+            type: 'shoe'
+        },
+        {
+            name: 'Linen',
+            price: 120,
+            picture: '/linen.jpg',
+            type: 'shoe'
         }
     ],
     hats: [
@@ -50,6 +66,24 @@ let catalogue = {
             price: 90,
             picture: '/topHat.jpg',
             type: 'hat'
+        },
+        {
+            name: 'Beanie',
+            price: 20,
+            picture: '/beanie.jpg',
+            type: 'hat'
+        },
+        {
+            name: 'Sun',
+            price: 50,
+            picture: '/sun.jpg',
+            type: 'hat'
+        },
+        {
+            name: 'Fez',
+            price: 1000,
+            picture: '/fez.jpg',
+            type: 'hat'
         }
     ],
     cart: []
@@ -66,6 +100,7 @@ app.get('/catalogue', (req, res) => {
     res.json(catalogue);
 })
 
+// Clears items in cart
 app.post('/clearCart', (req, res) => {
     catalogue.cart = [];
     res.json(catalogue.cart);
