@@ -59,7 +59,9 @@ export default class Shop extends React.Component{
 
     render(){
         // Redirects to homepage if user not logged in
+        // Added a call to clearCart to deal with a case in which the user manually clears local storage
         if(!localStorage.userName){
+            this.clearCart();
             return <Redirect to='/' />;
         }
         return (

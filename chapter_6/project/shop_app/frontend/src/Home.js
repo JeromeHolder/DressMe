@@ -10,6 +10,15 @@ export default class Home extends React.Component{
         }
     }
 
+    // Tests whether a user name exists in local storage and redirects to the shop if it does
+    componentDidMount(){
+        if(localStorage.userName){
+            this.setState({
+                redirect: true
+            });
+        }
+    }
+
     // Changes state if text is input, thereby enabling the button
     buttonValidate = (e) => {
         this.setState({
@@ -41,7 +50,7 @@ export default class Home extends React.Component{
                         <hr className="my-4"/>
                         <form onSubmit={this.textGrab}>
                             <input onChange={this.buttonValidate} type="text" placeholder='User Name' ref={(input) => this.input = input}/>
-                            <button className="btn btn-outline-primary" disabled={this.state.textInput.length === 0 ? true : false} type='submit'>Login</button>
+                            <button className="btn btn-primary" disabled={this.state.textInput.length === 0 ? true : false} type='submit'>Login</button>
                         </form>
                     </div>
                 </div>

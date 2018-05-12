@@ -20,7 +20,6 @@ export default class App extends Component {
       userName: userName
     }, ()=>{
       localStorage.userName=this.state.userName;
-      // console.log(history);
     })
   }
 
