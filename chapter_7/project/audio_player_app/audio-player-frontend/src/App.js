@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Route, Link} from 'react-router-dom';
 import './App.css';
 import SongList from './SongList';
+import Test from './Test';
 
 export default class App extends Component {
   constructor(){
@@ -13,10 +14,10 @@ export default class App extends Component {
     };
   }
 
-  componentDidMount(){
+  componentWillMount(){
     this.setState({
       songs: this.props.songs,
-      currentSong: this.props.songs[0]
+      currentSong: 0
     });
   }
 
@@ -28,11 +29,11 @@ export default class App extends Component {
     document.getElementById("audio").pause();
   }
 
-  // changeSong = (direction) => {
-  //   this.setState({
-  //     currentSong: this.props.songs[]
-  //   })
-  // }
+  changeSong = (direction) => {
+    this.setState({
+      currentSong: this.state.currentSong + direction
+    })
+  }
 
   render() {
     return (
@@ -48,6 +49,9 @@ export default class App extends Component {
               <li className="nav-item active">
                 <Link className="nav-link" to='/'>Home<span className="sr-only">(current)</span></Link>
               </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to='/test'>Test<span className="sr-only">(current)</span></Link>
+              </li>
             </ul>
             <form className="form-inline my-2 my-lg-0">
               <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
@@ -56,14 +60,14 @@ export default class App extends Component {
           </div>
         </nav>
         <Route exact path='/' render={()=>{return <SongList songs={this.state.songs}/> }} />
-        <Route exact path='/:songId' render={()=>{return }} />
+        <Route exact path='/test' render={()=>{return <Test/>}} />
         <footer>
-          {/* <button onClick={()=>{return this.changeSong(-1)}} >Previous</button> */}
-          <h3>Now playing: {this.state.currentSong.title}</h3>
-          <audio className="audio" id="audio" src={this.state.currentSong.source} ></audio>
+          <button onClick={()=>{return this.changeSong(-1)}} >Previous</button>
+          <h3>Now playing: {this.state.songs[this.state.currentSong].title}</h3>
+          <audio className="audio" id="audio" src={this.state.songs[this.state.currentSong].source} ></audio>
           <button onClick={this.play}>Play</button>
           <button onClick={this.pause}>Pause</button>
-          {/* <button onClick={()=>{return this.changeSong(+1)}}>Next</button> */}
+          <button onClick={()=>{return this.changeSong(+1)}}>Next</button>
         </footer>
       </div>
     );
