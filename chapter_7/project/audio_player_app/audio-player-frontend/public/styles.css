@@ -1,0 +1,19 @@
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: inherit;
+    background-color: red;
+    color: white;
+    text-align: center;
+}
+
+.mediastyle {
+    margin-left: 5vw;
+    margin-right: 5vw;
+    border: 1px solid black;
+}
+
+.audio {
+    margin-top: 1vh;
+}

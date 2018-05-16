@@ -75,7 +75,7 @@ export default class Shop extends React.Component{
                     </nav>
                     <div className="cart">
                         <Cart cart={this.state.cart}/>
-                        <button className="btn btn-dark" onClick={this.clearCart}>Clear Cart</button>
+                        <button className="btn btn-dark" disabled={this.state.cart.length === 0 ? true:false} onClick={this.clearCart}>Clear Cart</button>
                     </div>
                     <button className="btn btn-dark logout" onClick={this.props.logout}>Logout</button>
                 </div>

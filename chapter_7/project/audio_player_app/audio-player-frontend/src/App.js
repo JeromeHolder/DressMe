@@ -8,15 +8,31 @@ export default class App extends Component {
     super();
     this.state={
       audioState: 'stopped',
-      songs: []
+      songs: [],
+      currentSong: {}
     };
   }
 
   componentDidMount(){
     this.setState({
-      songs: this.props.songs
+      songs: this.props.songs,
+      currentSong: this.props.songs[0]
     });
   }
+
+  play = () => {
+    document.getElementById("audio").play();
+  }
+
+  pause = () => {
+    document.getElementById("audio").pause();
+  }
+
+  // changeSong = (direction) => {
+  //   this.setState({
+  //     currentSong: this.props.songs[]
+  //   })
+  // }
 
   render() {
     return (
@@ -32,12 +48,6 @@ export default class App extends Component {
               <li className="nav-item active">
                 <Link className="nav-link" to='/'>Home<span className="sr-only">(current)</span></Link>
               </li>
-              {/* <li className="nav-item">
-                <a className="nav-link" href="#">Link</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link disabled" href="#">Disabled</a>
-              </li> */}
             </ul>
             <form className="form-inline my-2 my-lg-0">
               <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
@@ -47,6 +57,14 @@ export default class App extends Component {
         </nav>
         <Route exact path='/' render={()=>{return <SongList songs={this.state.songs}/> }} />
         <Route exact path='/:songId' render={()=>{return }} />
+        <footer>
+          {/* <button onClick={()=>{return this.changeSong(-1)}} >Previous</button> */}
+          <h3>Now playing: {this.state.currentSong.title}</h3>
+          <audio className="audio" id="audio" src={this.state.currentSong.source} ></audio>
+          <button onClick={this.play}>Play</button>
+          <button onClick={this.pause}>Pause</button>
+          {/* <button onClick={()=>{return this.changeSong(+1)}}>Next</button> */}
+        </footer>
       </div>
     );
   }

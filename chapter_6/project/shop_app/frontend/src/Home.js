@@ -22,7 +22,7 @@ export default class Home extends React.Component{
     // Changes state if text is input, thereby enabling the button
     buttonValidate = (e) => {
         this.setState({
-            textInput: e.target.value
+            textInput: e.target.value.trimLeft()
         })
     }
 
