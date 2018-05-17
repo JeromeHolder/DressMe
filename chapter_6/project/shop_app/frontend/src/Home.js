@@ -49,7 +49,7 @@ export default class Home extends React.Component{
                         <h2 className="jumbotext">Login to access the store</h2>
                         <hr className="my-4"/>
                         <form onSubmit={this.textGrab}>
-                            <input onChange={this.buttonValidate} type="text" placeholder='User Name' ref={(input) => this.input = input}/>
+                            <input onChange={this.buttonValidate} type="text" placeholder='User Name' value={this.state.textInput} />
                             <button className="btn btn-primary" disabled={this.state.textInput.length === 0 ? true : false} type='submit'>Login</button>
                         </form>
                     </div>

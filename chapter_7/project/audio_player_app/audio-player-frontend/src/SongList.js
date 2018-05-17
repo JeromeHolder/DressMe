@@ -4,14 +4,16 @@ import {Link} from 'react-router-dom';
 export default class SongList extends React.Component{
     render(){
         return (
+            // Maps songs sent from state in app.js and renders a list item for each
             this.props.songs.map((song, i) =>{
-                return  <div className="media mediastyle">
-                            <img className="align-self-center mr-3" src="/No_Image__placeholder.png" alt="Generic placeholder image"/>
-                            <div className="media-body">
-                                <Link className="mt-0" to='/'>{song.title}</Link>
-                            </div>
-                        </div>
+                let urlparam = "/" + song.id;
+                return  <ul className="list-group" key={song.id}>
+                            <li className="list-group-item d-flex justify-content-between align-items-center">
+                                <Link to={urlparam}>{song.title}</Link>
+                                <button className="badge badge-primary badge-pill" onClick={()=>{this.props.listPlayHandler(i)}}>Play</button>
+                            </li>
+                        </ul>
                 })
-        )
-    }
-}
+        );
+    };
+};

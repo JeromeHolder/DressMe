@@ -17,3 +17,8 @@ footer {
 .audio {
     margin-top: 1vh;
 }
+
+.audioControl{
+    width: 3vw;
+    height: 3vw;
+}
