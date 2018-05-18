@@ -7,7 +7,7 @@ export default class SongDetails extends React.Component{
         let i = displaySong.id;
         return  <div className="media mainMargins">
                     <div className="media m-3">
-                        <img className="media-object img-fluid albumpic" src="/No_Image__placeholder.png" alt=""/>
+                        <img className="media-object img-fluid albumpic" src={displaySong.img} alt=""/>
                     </div>
                     <div className="media-body m-1">
                         <h4 className="media-heading detailList border-bottom orangeText">{displaySong.title}</h4>

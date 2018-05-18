@@ -73,6 +73,8 @@ body{
 .albumpic{
     border-radius: 50%;
     border: 2px solid #CB5F3E;
+    max-height: 30vh;
+    max-width: 30vw;
 }
 
 .orangeText{

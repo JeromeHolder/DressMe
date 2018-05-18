@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Route, Link, Switch} from 'react-router-dom';
+import {Route, Link, Switch, Redirect} from 'react-router-dom';
+import E404 from './404';
 import './App.css';
 import SongList from './SongList';
 import SongDetails from './SongDetails';
@@ -48,7 +49,6 @@ export default class App extends Component {
 
   // Click handler for previous and next buttons and conditionally calls play if play-state is true
   changeSong = (direction) => {
-    // this.displayDuration();
     this.setState({
       currentSong: this.state.currentSong + direction
     }, ()=>{if(this.state.audioState){this.audioref.play()}});
@@ -90,41 +90,39 @@ export default class App extends Component {
   render() {
     return (
       <div className="App container">
-        
-          <div className="sub-container">
+        <div className="sub-container">
           <div className="container-overlay">
-        </div>
-        {/* Nav */}
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-          <Link className="navbar-brand" to="/">SoundBot</Link>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item active">
-                <Link className="nav-link" to='/'>Home</Link>
-              </li>
-            </ul>
           </div>
-        </nav>
+          {/* Nav */}
+          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <Link className="navbar-brand" to="/">SoundBot</Link>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item active">
+                  <Link className="nav-link" to='/'>Home</Link>
+                </li>
+              </ul>
+            </div>
+          </nav>
 
-        <Switch>
-          <Route exact path='/' render={()=>{return <SongList songs={this.state.songs} listPlayHandler={this.listPlayHandler}/> }} />
-          <Route exact path='/:songId' render={(props)=>{return <SongDetails songs={this.state.songs} button={this.state.button} match={props.match} listPlayHandler={this.listPlayHandler}/>}} />
-        </Switch>
+          <Switch>
+            <Route exact path='/' render={()=>{return <SongList songs={this.state.songs} listPlayHandler={this.listPlayHandler}/> }} />
+            <Route exact path='/:songId' render={(props)=>{return <SongDetails songs={this.state.songs} button={this.state.button} match={props.match} listPlayHandler={this.listPlayHandler}/>}} />
+          </Switch>
 
-        {/* Player component */}
-        <div className="player">
-          <h3 className="orangeText">Now playing: {this.state.songs[this.state.currentSong].title}</h3>
-          <input className="audioControl" type="image" src="/Previous.svg" onClick={()=>{return this.changeSong(-1)}} disabled={this.state.currentSong === 0 ? true:false} alt=""/>
-          <audio onLoadedData={()=>{return this.displayDuration()}} onTimeUpdate={()=>{return this.displayTime()}} className="audio" id="audio" src={this.state.songs[this.state.currentSong].source} ref={(el)=>this.audioref = el}></audio>
-          <input className="audioControl" type="image" src={this.state.button} onClick={this.playPause} alt="" />
-          <input className="audioControl" type="image" src="/Next.svg" onClick={()=>{return this.changeSong(+1)}} disabled={this.state.currentSong === this.state.songs.length-1 ? true:false} alt="" />
-          <h4>{this.state.time}/{this.state.duration}</h4>
+          {/* Player component */}
+          <div className="player">
+            <h3 className="orangeText">Now playing: {this.state.songs[this.state.currentSong].title}</h3>
+            <input className="audioControl" type="image" src="/Previous.svg" onClick={()=>{return this.changeSong(-1)}} disabled={this.state.currentSong === 0 ? true:false} alt=""/>
+            <audio onLoadedData={()=>{return this.displayDuration()}} onTimeUpdate={()=>{return this.displayTime()}} className="audio" id="audio" src={this.state.songs[this.state.currentSong].source} ref={(el)=>this.audioref = el}></audio>
+            <input className="audioControl" type="image" src={this.state.button} onClick={this.playPause} alt="" />
+            <input className="audioControl" type="image" src="/Next.svg" onClick={()=>{return this.changeSong(+1)}} disabled={this.state.currentSong === this.state.songs.length-1 ? true:false} alt="" />
+            <h4>{this.state.time}/{this.state.duration}</h4>
+          </div>
         </div>
-        </div>
-        
       </div>
     );
   };
