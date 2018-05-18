@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, Link, Switch, Redirect} from 'react-router-dom';
+import {Route, Link, Switch} from 'react-router-dom';
 import E404 from './404';
 import './App.css';
 import SongList from './SongList';
@@ -111,6 +111,8 @@ export default class App extends Component {
           <Switch>
             <Route exact path='/' render={()=>{return <SongList songs={this.state.songs} listPlayHandler={this.listPlayHandler}/> }} />
             <Route exact path='/:songId' render={(props)=>{return <SongDetails songs={this.state.songs} button={this.state.button} match={props.match} listPlayHandler={this.listPlayHandler}/>}} />
+            <Route exact path='/error/404' render={()=>{return <E404 />}} />
+            <Route path='/*/*' component={E404} />
           </Switch>
 
           {/* Player component */}

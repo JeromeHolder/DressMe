@@ -1,7 +1,11 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 
 export default class SongDetails extends React.Component{
     render(){
+        if(this.props.songs[this.props.match.params.songId] === undefined){
+            return <Redirect to='/error/404' />
+        }
         // Pulls out the specific song for easy reference and the id for the onClick handler
         let displaySong = this.props.songs[this.props.match.params.songId];
         let i = displaySong.id;
