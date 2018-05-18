@@ -19,7 +19,7 @@ export default class App extends Component {
     };
   };
 
-  // Gets props from index.js and sets the array of songs in state - Will have axios.get once backend is set up
+  // Gets data from server and sets the array of songs in state
   componentDidMount(){
     axios.get('http://localhost:8080/songs')
          .then(result =>{
