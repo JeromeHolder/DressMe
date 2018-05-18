@@ -49,8 +49,15 @@ export default class App extends Component {
 
   // Click handler for previous and next buttons and conditionally calls play if play-state is true
   changeSong = (direction) => {
+    let newSong = this.state.currentSong + direction;
+    if(newSong < 0){
+      newSong = this.state.songs.length-1;
+    }
+    else if (newSong > this.state.songs.length-1){
+      newSong = 0;
+    }
     this.setState({
-      currentSong: this.state.currentSong + direction
+      currentSong: newSong
     }, ()=>{if(this.state.audioState){this.audioref.play()}});
   };
 
@@ -111,6 +118,7 @@ export default class App extends Component {
           <Switch>
             <Route exact path='/' render={()=>{return <SongList songs={this.state.songs} listPlayHandler={this.listPlayHandler}/> }} />
             <Route exact path='/:songId' render={(props)=>{return <SongDetails songs={this.state.songs} button={this.state.button} match={props.match} listPlayHandler={this.listPlayHandler}/>}} />
+            {/* Routes to for 404 and in case user enters non-existent paths */}
             <Route exact path='/error/404' render={()=>{return <E404 />}} />
             <Route path='/*/*' component={E404} />
           </Switch>
@@ -118,10 +126,10 @@ export default class App extends Component {
           {/* Player component */}
           <div className="player">
             <h3 className="orangeText">Now playing: {this.state.songs[this.state.currentSong].title}</h3>
-            <input className="audioControl" type="image" src="/Previous.svg" onClick={()=>{return this.changeSong(-1)}} disabled={this.state.currentSong === 0 ? true:false} alt=""/>
+            <input className="audioControl" type="image" src="/Previous.svg" onClick={()=>{return this.changeSong(-1)}} alt=""/>
             <audio onLoadedData={()=>{return this.displayDuration()}} onTimeUpdate={()=>{return this.displayTime()}} className="audio" id="audio" src={this.state.songs[this.state.currentSong].source} ref={(el)=>this.audioref = el}></audio>
             <input className="audioControl" type="image" src={this.state.button} onClick={this.playPause} alt="" />
-            <input className="audioControl" type="image" src="/Next.svg" onClick={()=>{return this.changeSong(+1)}} disabled={this.state.currentSong === this.state.songs.length-1 ? true:false} alt="" />
+            <input className="audioControl" type="image" src="/Next.svg" onClick={()=>{return this.changeSong(+1)}} alt="" />
             <h4>{this.state.time}/{this.state.duration}</h4>
           </div>
         </div>

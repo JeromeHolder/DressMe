@@ -9,8 +9,8 @@ export default class SongList extends React.Component{
                 let urlparam = "/" + song.id;
                 return  <ul className="list-group" key={song.id}>
                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                <Link className="orangeText" to={urlparam}>{song.title}</Link>
-                                <button className="badge" onClick={()=>{this.props.listPlayHandler(i)}}>Play</button>
+                                <Link className="orangeText listTitle" to={urlparam}>{song.title}</Link>
+                                <button className="audioControl" onClick={()=>{this.props.listPlayHandler(i)}}>Play</button>
                             </li>
                         </ul>
                 })
