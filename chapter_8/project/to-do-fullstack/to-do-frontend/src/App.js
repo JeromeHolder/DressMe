@@ -22,6 +22,7 @@ export default class App extends Component {
   componentDidMount(){
     axios.get('http://localhost:8080/todos')
          .then(result =>{
+           result.data.sort((a, b) => {return a.id-b.id;}); //Sort by id to maintain list order
            this.setState({
              todos: result.data
            });
@@ -52,19 +53,21 @@ export default class App extends Component {
     };
   };
 
-  // onChange handler called from Todo
-  setComplete = (i,c, con) => {
+  // onChange handler called from Todo - toggles the item's complete status
+  setComplete = (i, c, con, index) => {
     let updateTodo = {
       id:i,
       complete: !c,
       content:con
     }
-    // Filter out the one to be edited
-    let copy = this.state.todos.filter((todo) => {return todo.id !== i})
+    // Make a copy of the array in state
+    let copy = Array.from(this.state.todos);
     axios.put('http://localhost:8080/todos', updateTodo)
          .then(result => {
-            //  Push the result into the filtered copy and use it to overwrite state
-            copy.push(result.data);
+            //  Use splice to delete the existing todo and replace it with the updated one returned from the db
+              // Sort by id maintains the item's place in the list
+            copy.splice(index, 1, result.data);
+            copy.sort((a, b) => {return a.id-b.id;});
             this.setState({
               todos: copy
             }, ()=>this.checkClearState());
