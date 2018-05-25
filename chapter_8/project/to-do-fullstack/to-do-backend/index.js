@@ -59,8 +59,9 @@ app.put('/todos', (req, res)=>{
     let idToUpdate = req.body.id;
     let changeComplete = req.body.complete;
     let sendContent = req.body.content;
+    let sendCategory = req.body.category;
     new Todo({id:idToUpdate})
-            .save({complete:changeComplete, content:sendContent})
+            .save({complete:changeComplete, content:sendContent, category:sendCategory})
             .then(result => {
                 res.json(result.attributes);
             })

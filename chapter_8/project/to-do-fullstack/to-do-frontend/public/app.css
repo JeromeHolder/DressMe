@@ -12,6 +12,7 @@ body {
   background-size: cover;
   height: 100%;
   overflow: hidden;
+  overflow-y: auto;
 }
 
 .btnColor{
@@ -24,6 +25,16 @@ body {
   margin-right: 25%;
 }
 
-body {
-  overflow-y: auto;
+.categoryDropdown {
+  height: 34px;
+}
+
+.flexbox{
+  display: flex;
+}
+
+.categoryLabel{
+  flex-grow: 4;
+  text-align: right;
+  color: gray;
 }

@@ -14,7 +14,7 @@ export default class App extends Component {
       // Default state to have the clear complete button disabled
       clearButtonDisabled: true,
       // Default state for the filter
-      filter: 'all'
+      filter: 'all',
     };
   };
 
@@ -32,7 +32,7 @@ export default class App extends Component {
          });
   };
 
-  // onChange handler that changes state needed for the filter conditions in render()
+  // onChange handler that changes state needed to filter based on todo status or category
   setFilter = selected => {
     this.setState({
       filter: selected.target.value
@@ -54,22 +54,27 @@ export default class App extends Component {
   };
 
   // onChange handler called from Todo - toggles the item's complete status
-  setComplete = (i, c, con, index) => {
+  setComplete = (i, c, con, index, cat) => {
     let updateTodo = {
       id:i,
       complete: !c,
-      content:con
-    }
+      content:con,
+      category: cat
+    };
     // Make a copy of the array in state
     let copy = Array.from(this.state.todos);
     axios.put('http://localhost:8080/todos', updateTodo)
          .then(result => {
-            //  Use splice to delete the existing todo and replace it with the updated one returned from the db
+            //  Use map to replace the updated todo returned from the db
               // Sort by id maintains the item's place in the list
-            copy.splice(index, 1, result.data);
-            copy.sort((a, b) => {return a.id-b.id;});
+           let mod =  copy.map(el => {
+              if(el.id === result.data.id){
+                el = result.data
+              }
+              return el; 
+            }).sort((a, b) => {return a.id-b.id;});
             this.setState({
-              todos: copy
+              todos: mod
             }, ()=>this.checkClearState());
          })
          .catch(err =>{
@@ -78,10 +83,11 @@ export default class App extends Component {
   };
 
   // Called from TodoForm to add new items to the list of todos in state
-  addTodo = content => {
+  addTodo = (content, selectedCategory) => {
     let newTodo = {
       content: content,
-      complete: false
+      complete: false,
+      category: selectedCategory
     };
     let copy = Array.from(this.state.todos);
     axios.post('http://localhost:8080/todos', newTodo)
@@ -123,6 +129,21 @@ export default class App extends Component {
         return filteredTodos.complete === true
       });
     }
+    else if (this.state.filter === 'General'){
+      filteredListJSX = this.state.todos.filter((filteredTodos) => {
+        return filteredTodos.category === 'General'
+      });
+    }
+    else if (this.state.filter === 'Work'){
+      filteredListJSX = this.state.todos.filter((filteredTodos) => {
+        return filteredTodos.category === 'Work'
+      });
+    }
+    else if (this.state.filter === 'Private'){
+      filteredListJSX = this.state.todos.filter((filteredTodos) => {
+        return filteredTodos.category === 'Private'
+      });
+    }
     else {
       filteredListJSX = this.state.todos
     };
@@ -134,7 +155,7 @@ export default class App extends Component {
         <TodoForm addTodo={this.addTodo}/>
         <TodoList listContent={filteredListJSX} setComplete={this.setComplete}/>      
         <SelectDropdownFilter setFilter={this.setFilter}/>
-        <button onClick={this.clearComplete} disabled={this.state.clearButtonDisabled} className="pull-right btn btn-primary btnColor">Clear Complete</button>       
+        <button onClick={this.clearComplete} disabled={this.state.clearButtonDisabled} className="pull-right btn btn-primary btnColor">Clear Complete</button>
       </div>
     );
   };
