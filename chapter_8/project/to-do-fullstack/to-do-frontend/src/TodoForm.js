@@ -17,6 +17,7 @@ export default class TodoForm extends React.Component{
         });
     }
 
+    // Grabs the category value from the select drop down for use in grabTodo
     updateCategory = (e) => {
         this.setState({
             category: e.target.value
@@ -40,7 +41,7 @@ export default class TodoForm extends React.Component{
                         <button disabled={this.state.content.length === 0 ? true : false} className="btn btn-primary btnColor" type="submit">Add</button>
                     {/* </span> */}
                     <input type="text" onChange={this.updateContent} className="form-control " placeholder="Enter your task" value={this.state.content} />
-                    <select className='categoryDropdown btn btn-primary btnColor' onChange={this.updateCategory}>
+                    <select className='btn btn-primary btnColor' onChange={this.updateCategory}>
                         <option value="General">General</option>
                         <option value="Work">Work</option>
                         <option value="Private">Private</option>
