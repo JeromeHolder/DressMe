@@ -25,7 +25,7 @@ export default class App extends Component {
            result.data.sort((a, b) => {return a.id-b.id;}); //Sort by id to maintain list order
            this.setState({
              todos: result.data
-           });
+           }, ()=>this.checkClearState());
          })
          .catch(err=>{
            console.log(err);
