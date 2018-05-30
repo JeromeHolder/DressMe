@@ -1,7 +1,9 @@
 const express = require('express'),
       app = express(),
       axios = require('axios'),
-      config = require('./config');
+      config = require('./config'),
+      request = require('request'),
+      cheerio = require('cheerio');
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
@@ -25,7 +27,13 @@ const shoppingAssistants = [
             city: 'Toronto',
             province: 'On'
         },
-        addressString: '220+Yonge+St+Toronto+On'
+        addressString: '220+Yonge+St+Toronto+On',
+        image: '/John_Doe.jpg',
+        expertise: [
+            'Business Casual',
+            'Business'
+        ],
+        id: 0
     },
     {
         fname: 'Jane',
@@ -38,7 +46,12 @@ const shoppingAssistants = [
             city: 'Mississauga',
             province: 'On'
         },
-        addressString: '100+City+Centre+Dr+Missisauga+On'
+        addressString: '100+City+Centre+Dr+Missisauga+On',
+        image: '/Jane_Doe.jpg',
+        expertise: [
+            'Casual'
+        ],
+        id: 1
     },
     {
         fname: 'Sally',
@@ -51,10 +64,15 @@ const shoppingAssistants = [
             city: 'North York',
             province: 'On'
         },
-        addressString: '3401+Dufferin+St+North+York+On'
+        addressString: '3401+Dufferin+St+North+York+On',
+        image: '/Sally_Happy.jpg',
+        expertise: [
+            'Business'
+        ],
+        id: 2
     },
     {
-        fname: 'Johhny',
+        fname: 'Johnny',
         lname: 'Appleseed',
         availRad: 20,
         rating: 5,
@@ -64,12 +82,15 @@ const shoppingAssistants = [
             city: 'Scarborough',
             province: 'On'
         },
-        addressString: '300+Borough+Dr+Scarborough+On'
+        addressString: '300+Borough+Dr+Scarborough+On',
+        image: '/Johnny_Appleseed.jpg',
+        expertise: [
+            'Formal',
+            'Business'
+        ],
+        id: 3
     }
 ];
-
-// let apiKey = 'AIzaSyBDsppa1spLTfjeVUmcZRKzHvPjYv6kgVE';
-// let origin = '68+Corporate+Drive+Scarborough+On';
 
 app.post('/distance', (req, res) => {
     // Grabs user address from frontend
@@ -92,13 +113,33 @@ app.post('/distance', (req, res) => {
              });
             //  mapping through copy to produce a new dataset with distances from user and without addresses to send to frontend
              const infoToSend = copy.map((el, i) => {
-               return {'fname':el.fname, 'lname':el.lname, 'availRad':el.availRad, 'rating':el.rating, distance: distancesFromUser[i]}
+               return {'fname':el.fname, 'lname':el.lname, 'availRad':el.availRad, 'rating':el.rating, 'image':el.image, 'expertise':[...el.expertise], 'id':el.id, distance: distancesFromUser[i]}
              })
              res.json(infoToSend);
          })
          .catch(err => {
              console.log(err);
          });
+});
+
+
+
+app.get('/getHeadlines', (req, res) => {
+    const url = "https://www.google.ca/search?q=" + "fashion" + "trends" + "toronto";
+    let title = [];
+
+    request(url, (error, response, body) => {
+        if(error){
+            console.log(error);
+            return;
+        }
+        var $ = cheerio.load(body), hline = $(".r a");
+        // console.log($(hline).attr('href'));
+        hline.each((i, hline) => {
+            title.push({text:$(hline).text(), link:$(hline).attr('href')} );
+        })
+        res.json(title);
+    });
 });
 
 app.listen(8080, ()=>{console.log('Server running on 8080');});
