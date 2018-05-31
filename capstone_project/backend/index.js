@@ -22,18 +22,22 @@ const shoppingAssistants = [
         availRad: 5,
         rating: 3.5,
         address: {
-            number: 220,
-            street: 'Yonge St',
-            city: 'Toronto',
+            number: 300,
+            street: 'Borough Dr',
+            city: 'Scarborough',
             province: 'On'
         },
-        addressString: '220+Yonge+St+Toronto+On',
+        addressString: '300+Borough+Dr+Scarborough+On',
         image: '/John_Doe.jpg',
         expertise: [
             'Business Casual',
             'Business'
         ],
-        id: 0
+        id: 0,
+        avail: [{
+            day: '2018-05-31',
+            hours: [8, 9, 10, 11]
+        }]
     },
     {
         fname: 'Jane',
@@ -41,17 +45,21 @@ const shoppingAssistants = [
         availRad: 10,
         rating: 4,
         address: {
-            number: 100,
-            street: 'City Centre Dr',
-            city: 'Mississauga',
+            number: 300,
+            street: 'Borough Dr',
+            city: 'Scarborough',
             province: 'On'
         },
-        addressString: '100+City+Centre+Dr+Missisauga+On',
+        addressString: '300+Borough+Dr+Scarborough+On',
         image: '/Jane_Doe.jpg',
         expertise: [
             'Casual'
         ],
-        id: 1
+        id: 1,
+        avail: [{
+            day: '2018-05-31',
+            hours: [8, 9, 10, 11]
+        }]
     },
     {
         fname: 'Sally',
@@ -59,17 +67,21 @@ const shoppingAssistants = [
         availRad: 15,
         rating: 4.5,
         address: {
-            number: 3401,
-            street: 'Dufferin St',
-            city: 'North York',
+            number: 300,
+            street: 'Borough Dr',
+            city: 'Scarborough',
             province: 'On'
         },
-        addressString: '3401+Dufferin+St+North+York+On',
+        addressString: '300+Borough+Dr+Scarborough+On',
         image: '/Sally_Happy.jpg',
         expertise: [
             'Business'
         ],
-        id: 2
+        id: 2,
+        avail: [{
+            day: '2018-05-31',
+            hours: [8, 9, 10, 11]
+        }]
     },
     {
         fname: 'Johnny',
@@ -88,7 +100,11 @@ const shoppingAssistants = [
             'Formal',
             'Business'
         ],
-        id: 3
+        id: 3,
+        avail: [{
+            day: '2018-05-31',
+            hours: [8, 9, 10, 11]
+        }]
     }
 ];
 
@@ -113,7 +129,20 @@ app.post('/distance', (req, res) => {
              });
             //  mapping through copy to produce a new dataset with distances from user and without addresses to send to frontend
              const infoToSend = copy.map((el, i) => {
-               return {'fname':el.fname, 'lname':el.lname, 'availRad':el.availRad, 'rating':el.rating, 'image':el.image, 'expertise':[...el.expertise], 'id':el.id, distance: distancesFromUser[i]}
+                 let sendAvail = el.avail.map(obj => {
+                     return {...obj}
+                 })
+               return {
+                   'fname':el.fname,
+                   'lname':el.lname,
+                   'availRad':el.availRad,
+                   'rating':el.rating,
+                   'image':el.image,
+                   'expertise':[...el.expertise],
+                   'id':el.id,
+                   'avail': sendAvail,
+                   distance: distancesFromUser[i]
+                }
              })
              res.json(infoToSend);
          })

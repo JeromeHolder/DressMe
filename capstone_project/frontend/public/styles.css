@@ -2,3 +2,50 @@
     max-height: 10vh;
     max-width: 10vw;
 }
+
+.app-container {
+    height:90%;
+    padding-top:2.5%;
+    display:grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 90% 10%;
+}
+/* .topbar {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    overflow: hidden;
+} */
+.sidebar {
+    height: 100%;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    overflow: hidden;
+}
+
+.SADisplay {
+    height: 100%;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    overflow: hidden;
+}
+
+/* .homepage{
+    grid-row-start: 1;
+    grid-column-start: 1;
+    grid-column-end: 3;
+} */
+
+.date-container {
+    display: 'flex',
+    
+}
+
+.text {
+    width: 200;
+}

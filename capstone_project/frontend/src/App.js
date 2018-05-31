@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Route, Switch, Redirect, Link} from 'react-router-dom';
 import './App.css';
 import Home from './Home';
-import SearchResults from './SearchResults';
+import Search from './Search';
 import axios from 'axios';
 
 export default class App extends Component {
@@ -17,6 +17,7 @@ export default class App extends Component {
     };
   };
 
+  // Will remove scraping on home page and change home page to profile
   componentDidMount(){
     let origin = '68+Corporate+Drive+Scarborough+On';
     axios.all([axios.post('http://localhost:8080/distance', {origin:origin}), axios.get('http://localhost:8080/getHeadlines')])
@@ -31,18 +32,21 @@ export default class App extends Component {
          });
   };
 
+  // Updates the distance value in state to be used in the grabSearch function below
   updateDistance = (e) => {
     this.setState({
         distance: e.target.value
     });
   };
 
+  // Ensures that the redirect wont keep a user away from the home page
   backToHome = () => {
     this.setState({
       fireRedirect: false
     });
   };
 
+  // Handles the distance based search -- will need to add ability to search by expertise too
   grabSearch = (e) => {
       e.preventDefault();
       let filtered = this.state.shoppingAssistants.filter(el => {
@@ -60,7 +64,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="App container-fluid">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar topbar navbar-expand-lg navbar-light bg-light">
           <a className="navbar-brand">Dress.me</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -87,10 +91,9 @@ export default class App extends Component {
             </form>
           </div>
         </nav>
-        {/* I can wrap each route inside switch in a div and apply css to it to create a sidebar/frame layout */}
         <Switch>
-          <Route exact path='/' render={()=>{return this.state.fireRedirect? <Redirect to='/searchresults'/> : <Home headlines={this.state.headlines}/>}}/>
-          <Route path='/searchresults' render={()=>{return <SearchResults results={this.state.resultsJSX} />}} />
+            <Route exact path='/' render={()=>{return this.state.fireRedirect? <Redirect to='/searchresults'/> : <Home headlines={this.state.headlines}/>}}/>
+            <Route path='/searchresults' render={()=>{return <Search results={this.state.resultsJSX} />}} />
         </Switch>
       </div>
     );
