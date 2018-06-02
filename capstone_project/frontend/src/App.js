@@ -10,21 +10,19 @@ export default class App extends Component {
     super();
     this.state = {
       shoppingAssistants: [],
-      headlines: [''],
       distance: 5,
       resultsJSX: null,
       fireRedirect: false
     };
   };
 
-  // Will remove scraping on home page and change home page to profile
+  // Sends request to backend for an array of shopping assistants with their distance from the user's origin
   componentDidMount(){
-    let origin = '68+Corporate+Drive+Scarborough+On';
-    axios.all([axios.post('http://localhost:8080/distance', {origin:origin}), axios.get('http://localhost:8080/getHeadlines')])
+    let origin = '460+King+St+W+Toronto+On';
+    axios.post('http://localhost:8080/distance', {origin:origin})
          .then(results => {
            this.setState({
-             shoppingAssistants: results[0].data,
-             headlines: results[1].data //Successfully processing into titles and links on home page, but links are incorrect
+             shoppingAssistants: results.data,
            })
          })
          .catch(err => {
@@ -50,7 +48,7 @@ export default class App extends Component {
   grabSearch = (e) => {
       e.preventDefault();
       let filtered = this.state.shoppingAssistants.filter(el => {
-        if(el.distance <= this.state.distance){
+        if(el.distance <= this.state.distance+el.availRad){
           return el;
         };
         return filtered;
@@ -59,6 +57,22 @@ export default class App extends Component {
         resultsJSX: filtered,
         fireRedirect: true
       });
+  };
+
+  bookFunction = (i, d, hrs) => {
+    let booked = {
+      id:i,
+      day:d,
+      hours:hrs
+    };
+    console.log('booked');
+    axios.put('http://localhost:8080/book', booked)
+         .then(result => {
+           console.log(result);
+         })
+         .catch(err => {
+           console.log(err);
+         });
   };
 
   render() {
@@ -92,8 +106,8 @@ export default class App extends Component {
           </div>
         </nav>
         <Switch>
-            <Route exact path='/' render={()=>{return this.state.fireRedirect? <Redirect to='/searchresults'/> : <Home headlines={this.state.headlines}/>}}/>
-            <Route path='/searchresults' render={()=>{return <Search results={this.state.resultsJSX} />}} />
+            <Route exact path='/' render={()=>{return this.state.fireRedirect? <Redirect to='/searchresults'/> : <Home />}}/>
+            <Route path='/searchresults' render={()=>{return <Search results={this.state.resultsJSX} bookFunction={this.bookFunction}/>}} />
         </Switch>
       </div>
     );

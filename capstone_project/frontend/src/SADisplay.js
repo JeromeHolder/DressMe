@@ -8,28 +8,29 @@ export default class SADisplay extends React.Component{
     constructor(){
         super();
         this.state = {
-            selectedSA: null, //put this in Search and have the state change there (passed from SearchResults) to cause rerender in here
-            date: '',
-            hours: null,
-            selectedHours: [],
+            selectedSA: null, //the SA selected, passed in as props from SearchResults->Search
+            date: '', //date selected by the user
+            hours: null, //hours available for that day
+            selectedHours: [], //hours selected for booking by the user
             noavail: ''
         };
     };
 
     // Sets state conditionally
     componentDidMount(){
-        let sa;
-        if(this.props.results !== null){
-            sa = this.props.results.find(el => {
-            return el.id === parseInt(this.props.match.params.id, 10);
+        this.setState({
+            selectedSA: this.props.results
+        });
+    };
+
+    // Forces update when another SA is clicked from the results list
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps.results !== this.props.results){
+            this.setState({
+                selectedSA: this.props.results
             });
         }
-        if(sa !== undefined){
-            this.setState({
-                selectedSA: sa
-            });
-        };
-    };
+    }
 
     // Updates state with value from date picker
     dateGrab = (x) => {
@@ -82,10 +83,13 @@ export default class SADisplay extends React.Component{
         };
     };
 
+    grabBooking = (e) => {
+        e.preventDefault();
+        this.props.bookFunction(this.state.selectedSA.id, this.state.date, this.state.selectedHours);
+    }
+
     render(){
         // Conditionally displays the list of options based on whether availability exists or not
-            // Will need to change how this finds availability if I add the booked bolean to the data structure on the backend
-            // Or if I just use CSS to grey out and disable those that are booked I won't need to change how it finds availability
         let bookingOptions;
         if(this.state.hours === null){
             bookingOptions = <p>{this.state.noavail}</p>
@@ -102,20 +106,20 @@ export default class SADisplay extends React.Component{
                                 >
                                     <Checkbox
                                         disableRipple
-                                        // disabled
+                                        disabled={val.booked}
                                         onClick={()=>{this.listCheck(val)}}
                                     />
                                     <ListItemText primary={val.hour + ':00'} />
                                 
                                 </ListItem>
                                 ))}
-                                <button>Book Selected Hours</button>
+                                <button onClick={this.grabBooking} >Book Selected Hours</button>
                             </List>
         }
 
         // Conditionally renders the details page 
         if(this.state.selectedSA === null){
-            return <div>Doesn't Exist</div>
+            return <div className='SADisplay'>Doesn't Exist</div>
         }
         else{
             // Maps the list of expertise for the selected SA

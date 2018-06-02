@@ -2,10 +2,17 @@ const express = require('express'),
       app = express(),
       axios = require('axios'),
       config = require('./config'),
-      request = require('request'),
-      cheerio = require('cheerio');
+      mongoose = require('mongoose'),
+      User = require('./models/User'),
+      SA = require('./models/SA');
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+
+// Connect to mongod server
+mongoose.connect('mongodb://localhost/Capstone');
+const db = mongoose.connection;
+db.on('open', ()=>{console.log('Connected to mongodb');});
+
 
 // Allows CORS
 app.use((req,res,next)=>{
@@ -15,228 +22,87 @@ app.use((req,res,next)=>{
     next();
 });
 
-const shoppingAssistants = [
-    {
-        fname: 'John',
-        lname: 'Doe',
-        availRad: 5,
-        rating: 3.5,
-        address: {
-            number: 300,
-            street: 'Borough Dr',
-            city: 'Scarborough',
-            province: 'On'
-        },
-        addressString: '300+Borough+Dr+Scarborough+On',
-        image: '/John_Doe.jpg',
-        expertise: [
-            'Business Casual',
-            'Business'
-        ],
-        id: 0,
-        avail: [{
-            day: '2018-06-08',
-            hours: [
-                {
-                    hour: 8,
-                    booked: false
-                },
-                {
-                    hour: 9,
-                    booked: false
-                },
-                {
-                    hour: 10,
-                    booked: false
-                },
-                {
-                    hour: 11,
-                    booked: false
-                }
-            ]
-        }]
-    },
-    {
-        fname: 'Jane',
-        lname: 'Doe',
-        availRad: 10,
-        rating: 4,
-        address: {
-            number: 300,
-            street: 'Borough Dr',
-            city: 'Scarborough',
-            province: 'On'
-        },
-        addressString: '300+Borough+Dr+Scarborough+On',
-        image: '/Jane_Doe.jpg',
-        expertise: [
-            'Casual'
-        ],
-        id: 1,
-        avail: [{
-            day: '2018-06-08',
-            hours: [
-                {
-                    hour: 8,
-                    booked: false
-                },
-                {
-                    hour: 9,
-                    booked: false
-                },
-                {
-                    hour: 10,
-                    booked: false
-                },
-                {
-                    hour: 11,
-                    booked: false
-                }
-            ]
-        }]
-    },
-    {
-        fname: 'Sally',
-        lname: 'Happy',
-        availRad: 15,
-        rating: 4.5,
-        address: {
-            number: 300,
-            street: 'Borough Dr',
-            city: 'Scarborough',
-            province: 'On'
-        },
-        addressString: '300+Borough+Dr+Scarborough+On',
-        image: '/Sally_Happy.jpg',
-        expertise: [
-            'Business'
-        ],
-        id: 2,
-        avail: [{
-            day: '2018-06-08',
-            hours: [
-                {
-                    hour: 8,
-                    booked: false
-                },
-                {
-                    hour: 9,
-                    booked: false
-                },
-                {
-                    hour: 10,
-                    booked: false
-                },
-                {
-                    hour: 11,
-                    booked: false
-                }
-            ]
-        }]
-    },
-    {
-        fname: 'Johnny',
-        lname: 'Appleseed',
-        availRad: 20,
-        rating: 5,
-        address: {
-            number: 300,
-            street: 'Borough Dr',
-            city: 'Scarborough',
-            province: 'On'
-        },
-        addressString: '300+Borough+Dr+Scarborough+On',
-        image: '/Johnny_Appleseed.jpg',
-        expertise: [
-            'Formal',
-            'Business'
-        ],
-        id: 3,
-        avail: [{
-            day: '2018-06-08',
-            hours: [
-                {
-                    hour: 8,
-                    booked: false
-                },
-                {
-                    hour: 9,
-                    booked: false
-                },
-                {
-                    hour: 10,
-                    booked: false
-                },
-                {
-                    hour: 11,
-                    booked: false
-                }
-            ]
-        }]
-    }
-];
+// This adds/updates existing records
+// SA.updateOne(
+//     {'_id': '5b12e4c9ef85b32a609679cb'},
+//     { $set: {'blurb':'test 2'} }
+// )
+// .then(result => {
+//     console.log(result);
+// })
+// .catch(err => {
+//     console.log('error' + err);
+// })
+
+// finds a record by id
+// SA.findById('5b12e4c9ef85b32a609679cb')
+    // .then(result => {
+    //     console.log(result);
+    // })
+    // .catch(err => {
+    //     console.log(err);
+    // })
 
 app.post('/distance', (req, res) => {
     // Grabs user address from frontend
     let origin = req.body.origin;
     // Deep clone array and loop through to build destinations string for API call
-    let copy = Array.from(shoppingAssistants);
-    let destinations = '';
-    for(let i = 0; i < copy.length; i++) {
-        destinations = destinations + '|' + copy[i].addressString;
-    };
-    // API call
-    axios.get('https://maps.googleapis.com/maps/api/distancematrix/json?origins='+origin+'&destinations='+destinations+'key='+config.GOOGLE_API_KEY)
-         .then(result => {
-            //  unpacking results
-             let infoReturned = result.data.rows[0].elements;
-             let distancesFromUser;
-            //  mapping results to get distance values
-             distancesFromUser = infoReturned.map( el => {
-                 return parseFloat(el.distance.text)
-             });
-            //  mapping through copy to produce a new dataset with distances from user and without addresses to send to frontend
-             const infoToSend = copy.map((el, i) => {
-                 let sendAvail = el.avail.map(obj => {
-                     return {...obj}
-                 })
-               return {
-                   'fname':el.fname,
-                   'lname':el.lname,
-                   'availRad':el.availRad,
-                   'rating':el.rating,
-                   'image':el.image,
-                   'expertise':[...el.expertise],
-                   'id':el.id,
-                   'avail': sendAvail,
-                   distance: distancesFromUser[i]
-                }
-             })
-             res.json(infoToSend);
-         })
-         .catch(err => {
-             console.log(err);
-         });
-});
+    SA.find({})
+      .then(results => {
+        // console.log(results[0].avail[0].hours);
+        let copy = Array.from(results);
+        let destinations = '';
+        for(let i = 0; i < copy.length; i++) {
+            destinations = destinations + '|' + copy[i].addressString;
+        };
+        // API call
+        axios.get('https://maps.googleapis.com/maps/api/distancematrix/json?origins='+origin+'&destinations='+destinations+'key='+config.GOOGLE_API_KEY)
+            .then(result => {
 
+                //  unpacking results
+                let infoReturned = result.data.rows[0].elements;
 
+                //  mapping results to get distance values
+                let distancesFromUser = infoReturned.map( el => {
+                    return parseFloat(el.distance.text)
+                });
 
-app.get('/getHeadlines', (req, res) => {
-    const url = "https://www.google.ca/search?q=" + "fashion" + "trends" + "toronto";
-    let title = [];
-
-    request(url, (error, response, body) => {
-        if(error){
-            console.log(error);
-            return;
-        }
-        var $ = cheerio.load(body), hline = $(".r a");
-        // console.log($(hline).attr('href'));
-        hline.each((i, hline) => {
-            title.push({text:$(hline).text(), link:$(hline).attr('href')} );
+                //  mapping through copy to produce a new dataset with distances from user and without addresses to send to frontend
+                const infoToSend = copy.map((el, i) => {
+                    return {
+                        'fname':el.fname,
+                        'lname':el.lname,
+                        'availRad':el.availRad,
+                        'rating':el.rating,
+                        'image':el.image,
+                        'expertise':[...el.expertise],
+                        'id':el.id,
+                        'avail': el.avail,
+                        distance: distancesFromUser[i]
+                    }
+                });
+                res.json(infoToSend);
+            })
+            .catch(err => {
+                console.log(err);
+            });
         })
-        res.json(title);
-    });
+        .catch(err => {
+            console.log(err);
+        });
 });
+
+app.put('/book', (req, res) => {
+    SA.updateOne(
+        {'_id':'5b12fdfe39b7e907a4f76b34', 'avail._id': '5b12fdfe39b7e907a4f76b3f', 'avail.hours._id': '5b12fdfe39b7e907a4f76b42'},
+        { $set: {'avail.hours.$$.booked':'true'} }
+    )
+    .then(result => {
+        console.log(result);
+    })
+    .catch(err => {
+        console.log('error' + err);
+    })
+})
 
 app.listen(8080, ()=>{console.log('Server running on 8080');});
