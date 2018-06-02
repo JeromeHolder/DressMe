@@ -35,8 +35,25 @@ const shoppingAssistants = [
         ],
         id: 0,
         avail: [{
-            day: '2018-05-31',
-            hours: [8, 9, 10, 11]
+            day: '2018-06-08',
+            hours: [
+                {
+                    hour: 8,
+                    booked: false
+                },
+                {
+                    hour: 9,
+                    booked: false
+                },
+                {
+                    hour: 10,
+                    booked: false
+                },
+                {
+                    hour: 11,
+                    booked: false
+                }
+            ]
         }]
     },
     {
@@ -57,8 +74,25 @@ const shoppingAssistants = [
         ],
         id: 1,
         avail: [{
-            day: '2018-05-31',
-            hours: [8, 9, 10, 11]
+            day: '2018-06-08',
+            hours: [
+                {
+                    hour: 8,
+                    booked: false
+                },
+                {
+                    hour: 9,
+                    booked: false
+                },
+                {
+                    hour: 10,
+                    booked: false
+                },
+                {
+                    hour: 11,
+                    booked: false
+                }
+            ]
         }]
     },
     {
@@ -79,8 +113,25 @@ const shoppingAssistants = [
         ],
         id: 2,
         avail: [{
-            day: '2018-05-31',
-            hours: [8, 9, 10, 11]
+            day: '2018-06-08',
+            hours: [
+                {
+                    hour: 8,
+                    booked: false
+                },
+                {
+                    hour: 9,
+                    booked: false
+                },
+                {
+                    hour: 10,
+                    booked: false
+                },
+                {
+                    hour: 11,
+                    booked: false
+                }
+            ]
         }]
     },
     {
@@ -102,8 +153,25 @@ const shoppingAssistants = [
         ],
         id: 3,
         avail: [{
-            day: '2018-05-31',
-            hours: [8, 9, 10, 11]
+            day: '2018-06-08',
+            hours: [
+                {
+                    hour: 8,
+                    booked: false
+                },
+                {
+                    hour: 9,
+                    booked: false
+                },
+                {
+                    hour: 10,
+                    booked: false
+                },
+                {
+                    hour: 11,
+                    booked: false
+                }
+            ]
         }]
     }
 ];
