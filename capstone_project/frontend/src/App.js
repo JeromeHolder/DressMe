@@ -11,21 +11,23 @@ export default class App extends Component {
     this.state = {
       shoppingAssistants: [],
       distance: 5,
-      expertise: 'casual',
+      expertise: 'Casual',
       resultsJSX: null,
       fireRedirect: false,
-      currentUser: {}
+      currentUser: []
     };
   };
 
   // Sends request to backend for an array of shopping assistants with their distance from the user's origin
   componentDidMount(){
     let origin = '460+King+St+W+Toronto+On';
-    axios.all([axios.post('http://localhost:8080/distance', {origin:origin}), axios.get('http://localhost:8080/user')])
+    axios.all([axios.post('http://localhost:8080/api/distance', {origin:origin}), axios.get('http://localhost:8080/api/user')])
          .then(results => {
+           let copy = Array.from(this.state.currentUser);
+           copy.push(results[1].data);
            this.setState({
              shoppingAssistants: results[0].data,
-             currentUser: results[1].data
+             currentUser: copy,
            });
          })
          .catch(err => {
@@ -58,7 +60,7 @@ export default class App extends Component {
   grabSearch = (e) => {
       e.preventDefault();
 
-      let copy = []
+      let copy = [];
       this.state.shoppingAssistants.forEach(el => {
         let found = el.expertise.find(exp => {
           return exp === this.state.expertise
@@ -66,7 +68,7 @@ export default class App extends Component {
         if(found !== undefined){
           copy.push(el);
         }
-      })
+      });
       let filtered = copy.filter(el => {
         if(el.distance <= this.state.distance+el.availRad){
           return el;
@@ -80,14 +82,45 @@ export default class App extends Component {
   };
 
   // Handles booking
-  bookFunction = (i, d, hrs) => {
+  bookFunction = (dateid, hrsIDs, bookedRecord) => {
+    
+    // Updates the array of bookings in currentUser in state and passes that array inside 'booked' to the backend to update the db
+    let copy = Array.from(this.state.currentUser);
+    bookedRecord.forEach(el => {
+      copy[0].bookings.push(el);
+    });
     let booked = {
-      id:i,
-      day:d,
-      hours:hrs
+      day:dateid,
+      hours:hrsIDs,
+      user: this.state.currentUser._id,
+      bookings: copy[0].bookings
     };
-    console.log('booked');
-    axios.put('http://localhost:8080/book', booked)
+    this.setState({
+      currentUser:copy
+    });
+    axios.put('http://localhost:8080/api/book', booked)
+         .then(result => {
+           console.log(result);
+         })
+         .catch(err => {
+           console.log(err);
+         });
+  };
+
+  // Handles cancelling a booking
+  cancelBooking = (index, hourID) => {
+    let copy = Array.from(this.state.currentUser)
+    copy[0].bookings.splice(index,1);
+    let cancelInfo = {
+      id: hourID,
+      bookings: copy[0].bookings
+    };
+    this.setState({
+      currentUser: copy
+    });
+
+    // Sends the object 'cancelInfo' to the db to update
+    axios.put('http://localhost:8080/api/cancel', cancelInfo)
          .then(result => {
            console.log(result);
          })
@@ -107,10 +140,7 @@ export default class App extends Component {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link className="nav-link" onClick={this.backToHome} to="/">Home </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/profile">Profile</Link>
+                <Link className="nav-link" onClick={this.backToHome} to="/">Profile </Link>
               </li>
             </ul>
             <form className="form-inline my-2 my-lg-0" onSubmit={this.grabSearch}>
@@ -133,10 +163,10 @@ export default class App extends Component {
           </div>
         </nav>
         <Switch>
-            <Route exact path='/' render={()=>{return this.state.fireRedirect? <Redirect to='/searchresults'/> : <Profile user={this.state.currentUser}/>}}/>
+            <Route exact path='/' render={()=>{return this.state.fireRedirect? <Redirect to='/searchresults'/> : <Profile user={this.state.currentUser}  cancelBooking={this.cancelBooking}/>}}/>
             <Route path='/searchresults' render={()=>{return <Search results={this.state.resultsJSX} bookFunction={this.bookFunction}/>}} />
         </Switch>
       </div>
     );
-  }
-}
+  };
+};

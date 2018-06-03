@@ -85,7 +85,43 @@ export default class SADisplay extends React.Component{
 
     grabBooking = (e) => {
         e.preventDefault();
-        this.props.bookFunction(this.state.selectedSA.id, this.state.date, this.state.selectedHours);
+
+        // Collects data about the users booking for storage, display and possibly cancelling
+        let bookedRecord = [];
+        this.state.selectedHours.forEach(el =>{
+            let record = {
+                SA_fname: this.state.selectedSA.fname,
+                SA_lname: this.state.selectedSA.lname,
+                date: this.state.date,
+                hour: el
+            };
+            bookedRecord.push(record);
+        });
+
+        // Finds the id of the date selected
+        let dateid = this.state.selectedSA.avail.find(el => {
+            return el.day === this.state.date;
+        });
+        // Finds the ids of the hours selected
+        let hoursIDs = this.state.selectedHours.map(el => {
+            return el._id;
+        });
+        // Changes the frontend booked status of each hour booked - bookFunction below changes the db
+        let copy = Array.from(this.state.hours);
+        copy.forEach(element => {
+            let foundMatch = this.state.selectedHours.find(el  => {
+                return el._id === element._id
+            })
+            if(foundMatch !== undefined){
+                element.booked = true;
+            }
+        });
+        // Sets state for disabling list items once booked and resets the selected hours to an empty array
+        this.setState({
+            hours: copy,
+            selectedHours: []
+        });
+        this.props.bookFunction(dateid._id, hoursIDs, bookedRecord);
     }
 
     render(){
@@ -96,7 +132,6 @@ export default class SADisplay extends React.Component{
         }
         else {
             bookingOptions = <List>
-                                {/* Needs onClick handler for booking */}
                                 {this.state.hours.map(val => (
                                 <ListItem
                                     key={val.hour}
@@ -110,10 +145,9 @@ export default class SADisplay extends React.Component{
                                         onClick={()=>{this.listCheck(val)}}
                                     />
                                     <ListItemText primary={val.hour + ':00'} />
-                                
                                 </ListItem>
                                 ))}
-                                <button onClick={this.grabBooking} >Book Selected Hours</button>
+                                <button onClick={this.grabBooking}>Book Selected Hours</button> {/* want to disable this if nothing checked - probably change to bootstrap */}
                             </List>
         }
 
@@ -124,7 +158,7 @@ export default class SADisplay extends React.Component{
         else{
             // Maps the list of expertise for the selected SA
             let expertiseList = this.state.selectedSA.expertise.map((item, i) => {
-                return <span key={i} >{item}</span>
+                return <span key={i} >{item} </span>
             })
 
             // Constructs the current date for use as the min to validate the datepicker
@@ -145,6 +179,7 @@ export default class SADisplay extends React.Component{
                     <img className='SAimage' src={this.state.selectedSA.image} alt=""/>
                     <h2>{this.state.selectedSA.availRad}</h2>
                     <h3>{this.state.selectedSA.rating}</h3>
+                    <h3>{this.state.selectedSA.blurb}</h3>
                     {expertiseList}
     
                     

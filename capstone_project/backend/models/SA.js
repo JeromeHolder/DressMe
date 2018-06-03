@@ -41,27 +41,11 @@ const saSchema = Schema({
     },
     image: String,
     expertise: {
-        type: Array //Not sure about this
+        type: Array
     },
     avail: [{
-        day: {
-            type: String,
-            required: true
-        },
-        hours: [{
-            hour: {
-                type: Number,
-                required: true
-            },
-            booked: {
-                type: Boolean,
-                required: true
-            },
-            bookedBy: {
-                type: ObjectId,
-                ref: 'User'
-            }
-        }]
+        type: ObjectId,
+        ref: 'Schedule'
     }],
     blurb: {
         type: String

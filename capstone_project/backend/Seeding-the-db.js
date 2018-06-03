@@ -10,7 +10,8 @@
 //     },
 //     addressString: '460+King+St+W+Toronto+On',
 //     image: '/user.jpg',
-//     blurb: 'I am a user'
+//     blurb: 'I am a user',
+//     bookings: []
 // });
 // newUser.save()
 //        .then(savedUser => {
@@ -19,6 +20,43 @@
 //        .catch(err => {
 //            console.log(err);
 //        });
+
+
+// Create new Schedules
+// let newSchedule = Schedule({
+//     day: '2018-06-09',
+//     hours: [
+//         {
+//             hour: 8,
+//             booked: false,
+//             bookedBy: null
+//         },
+//         {
+//             hour: 9,
+//             booked: false,
+//             bookedBy: null
+//         },
+//         {
+//             hour: 10,
+//             booked: false,
+//             bookedBy: null
+//         },
+//         {
+//             hour: 11,
+//             booked: false,
+//             bookedBy: null
+//         }
+//     ]
+// });
+
+// newSchedule.save()
+//      .then(savedSchedule => {
+//          console.log(savedSchedule);
+//      })
+//      .catch(err => {
+//          console.log(err);
+//      }); 
+
 
 // Create new SAs
 // let newSA = SA({
@@ -38,70 +76,7 @@
 //         'Formal',
 //         'Business'
 //     ],
-//     id: 3,
-//     avail: [{
-//         day: '2018-06-08',
-//         hours: [
-//             {
-//                 hour: 8,
-//                 booked: false
-//             },
-//             {
-//                 hour: 9,
-//                 booked: false
-//             },
-//             {
-//                 hour: 10,
-//                 booked: false
-//             },
-//             {
-//                 hour: 11,
-//                 booked: false
-//             }
-//         ]
-//         },
-//         {
-//         day: '2018-06-09',
-//         hours: [
-//             {
-//                 hour: 8,
-//                 booked: false
-//             },
-//             {
-//                 hour: 9,
-//                 booked: false
-//             },
-//             {
-//                 hour: 10,
-//                 booked: false
-//             },
-//             {
-//                 hour: 11,
-//                 booked: false
-//             }
-//         ]
-//         },
-//         {
-//         day: '2018-06-10',
-//         hours: [
-//             {
-//                 hour: 8,
-//                 booked: false
-//             },
-//             {
-//                 hour: 9,
-//                 booked: false
-//             },
-//             {
-//                 hour: 10,
-//                 booked: false
-//             },
-//             {
-//                 hour: 11,
-//                 booked: false
-//             }
-//         ]
-//         }
+//     avail: [
 //     ]
 // });
 
@@ -131,70 +106,7 @@
 //             'Business Casual',
 //             'Business'
 //         ],
-//         id: 0,
-//         avail: [{
-//             day: '2018-06-08',
-//             hours: [
-//                 {
-//                     hour: 8,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 9,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 10,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 11,
-//                     booked: false
-//                 }
-//             ]
-//             },
-//             {
-//             day: '2018-06-09',
-//             hours: [
-//                 {
-//                     hour: 8,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 9,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 10,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 11,
-//                     booked: false
-//                 }
-//             ]
-//             },
-//             {
-//             day: '2018-06-10',
-//             hours: [
-//                 {
-//                     hour: 8,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 9,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 10,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 11,
-//                     booked: false
-//                 }
-//             ]
-//             }
+//         avail: [
 //         ]
 //     },
 //     {
@@ -213,70 +125,7 @@
 //         expertise: [
 //             'Casual'
 //         ],
-//         id: 1,
-//         avail: [{
-//             day: '2018-06-08',
-//             hours: [
-//                 {
-//                     hour: 8,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 9,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 10,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 11,
-//                     booked: false
-//                 }
-//             ]
-//             },
-//             {
-//             day: '2018-06-09',
-//             hours: [
-//                 {
-//                     hour: 8,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 9,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 10,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 11,
-//                     booked: false
-//                 }
-//             ]
-//             },
-//             {
-//             day: '2018-06-10',
-//             hours: [
-//                 {
-//                     hour: 8,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 9,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 10,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 11,
-//                     booked: false
-//                 }
-//             ]
-//             }
+//         avail: [
 //         ]
 //     },
 //     {
@@ -295,70 +144,7 @@
 //         expertise: [
 //             'Business'
 //         ],
-//         id: 2,
-//         avail: [{
-//             day: '2018-06-08',
-//             hours: [
-//                 {
-//                     hour: 8,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 9,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 10,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 11,
-//                     booked: false
-//                 }
-//             ]
-//             },
-//             {
-//             day: '2018-06-09',
-//             hours: [
-//                 {
-//                     hour: 8,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 9,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 10,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 11,
-//                     booked: false
-//                 }
-//             ]
-//             },
-//             {
-//             day: '2018-06-10',
-//             hours: [
-//                 {
-//                     hour: 8,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 9,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 10,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 11,
-//                     booked: false
-//                 }
-//             ]
-//             }
+//         avail: [
 //         ]
 //     },
 //     {
@@ -378,70 +164,7 @@
 //             'Formal',
 //             'Business'
 //         ],
-//         id: 3,
-//         avail: [{
-//             day: '2018-06-08',
-//             hours: [
-//                 {
-//                     hour: 8,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 9,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 10,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 11,
-//                     booked: false
-//                 }
-//             ]
-//             },
-//             {
-//             day: '2018-06-09',
-//             hours: [
-//                 {
-//                     hour: 8,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 9,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 10,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 11,
-//                     booked: false
-//                 }
-//             ]
-//             },
-//             {
-//             day: '2018-06-10',
-//             hours: [
-//                 {
-//                     hour: 8,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 9,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 10,
-//                     booked: false
-//                 },
-//                 {
-//                     hour: 11,
-//                     booked: false
-//                 }
-//             ]
-//             }
+//         avail: [
 //         ]
 //     }
 // ];

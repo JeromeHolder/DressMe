@@ -37,6 +37,7 @@ const userSchema = Schema({
     blurb: {
         type: String
     },
+    bookings: [],
     created_at: {
         type: Date,
         default: Date.now,
