@@ -4,7 +4,7 @@
 }
 
 .app-container {
-    height:90%;
+    height:100%;
     padding-top:2.5%;
     display:grid;
     grid-template-columns: 30% 70%;
@@ -35,6 +35,11 @@
 
 .text {
     width: 200;
+}
+
+.profilepic {
+    max-height: 20%;
+    max-width: 20%;
 }
 
 /* .navbar {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Route, Switch, Redirect, Link} from 'react-router-dom';
 import './App.css';
-import Home from './Home';
+import Profile from './Profile';
 import Search from './Search';
 import axios from 'axios';
 
@@ -11,30 +11,26 @@ export default class App extends Component {
     this.state = {
       shoppingAssistants: [],
       distance: 5,
+      expertise: 'casual',
       resultsJSX: null,
-      fireRedirect: false
+      fireRedirect: false,
+      currentUser: {}
     };
   };
 
   // Sends request to backend for an array of shopping assistants with their distance from the user's origin
   componentDidMount(){
     let origin = '460+King+St+W+Toronto+On';
-    axios.post('http://localhost:8080/distance', {origin:origin})
+    axios.all([axios.post('http://localhost:8080/distance', {origin:origin}), axios.get('http://localhost:8080/user')])
          .then(results => {
            this.setState({
-             shoppingAssistants: results.data,
-           })
+             shoppingAssistants: results[0].data,
+             currentUser: results[1].data
+           });
          })
          .catch(err => {
             console.log(err);
          });
-  };
-
-  // Updates the distance value in state to be used in the grabSearch function below
-  updateDistance = (e) => {
-    this.setState({
-        distance: e.target.value
-    });
   };
 
   // Ensures that the redirect wont keep a user away from the home page
@@ -44,10 +40,34 @@ export default class App extends Component {
     });
   };
 
+  // Updates the distance value in state to be used in the grabSearch function below
+  updateDistance = (e) => {
+    this.setState({
+        distance: e.target.value
+    });
+  };
+
+   // Updates the expertise value in state to be used in the grabSearch function below
+   updateExpertise = (e) => {
+    this.setState({
+        expertise: e.target.value
+    });
+  };
+
   // Handles the distance based search -- will need to add ability to search by expertise too
   grabSearch = (e) => {
       e.preventDefault();
-      let filtered = this.state.shoppingAssistants.filter(el => {
+
+      let copy = []
+      this.state.shoppingAssistants.forEach(el => {
+        let found = el.expertise.find(exp => {
+          return exp === this.state.expertise
+        })
+        if(found !== undefined){
+          copy.push(el);
+        }
+      })
+      let filtered = copy.filter(el => {
         if(el.distance <= this.state.distance+el.availRad){
           return el;
         };
@@ -59,6 +79,7 @@ export default class App extends Component {
       });
   };
 
+  // Handles booking
   bookFunction = (i, d, hrs) => {
     let booked = {
       id:i,
@@ -101,12 +122,18 @@ export default class App extends Component {
                     <option value="15">15km</option>
                     <option value="20">20km</option>
                 </select>
+                <select className='btn btn-outline-success my-2 my-sm-0 btnColor' onChange={this.updateExpertise}>
+                    <option value="Casual">Casual</option>
+                    <option value="Business Casual">Business Casual</option>
+                    <option value="Business">Business</option>
+                    <option value="Formal">Formal</option>
+                </select>
               </div>
             </form>
           </div>
         </nav>
         <Switch>
-            <Route exact path='/' render={()=>{return this.state.fireRedirect? <Redirect to='/searchresults'/> : <Home />}}/>
+            <Route exact path='/' render={()=>{return this.state.fireRedirect? <Redirect to='/searchresults'/> : <Profile user={this.state.currentUser}/>}}/>
             <Route path='/searchresults' render={()=>{return <Search results={this.state.resultsJSX} bookFunction={this.bookFunction}/>}} />
         </Switch>
       </div>

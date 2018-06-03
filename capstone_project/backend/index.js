@@ -43,9 +43,21 @@ app.use((req,res,next)=>{
     //     console.log(err);
     // })
 
+app.get('/user', (req, res) => {
+    User.findById('5b12f60e790e98226cf737d7')
+        .then(result => {
+            res.json(result);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
 app.post('/distance', (req, res) => {
+
     // Grabs user address from frontend
     let origin = req.body.origin;
+    
     // Deep clone array and loop through to build destinations string for API call
     SA.find({})
       .then(results => {
@@ -55,6 +67,7 @@ app.post('/distance', (req, res) => {
         for(let i = 0; i < copy.length; i++) {
             destinations = destinations + '|' + copy[i].addressString;
         };
+
         // API call
         axios.get('https://maps.googleapis.com/maps/api/distancematrix/json?origins='+origin+'&destinations='+destinations+'key='+config.GOOGLE_API_KEY)
             .then(result => {
