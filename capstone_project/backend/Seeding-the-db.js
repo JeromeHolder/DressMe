@@ -1,7 +1,7 @@
 // Create a user
 // let newUser = User({
-//     fname: 'Basic',
-//     lname: 'User',
+//     fname: 'Alan',
+//     lname: 'Turing',
 //     address: {
 //         number: 460,
 //         street: 'King St W',
@@ -10,8 +10,10 @@
 //     },
 //     addressString: '460+King+St+W+Toronto+On',
 //     image: '/user.jpg',
-//     blurb: 'I am a user',
-//     bookings: []
+//     blurb: "I am terrible at finding good clothes for myself.  I never know what's trendy and I just can't keep up!",
+//     bookings: [],
+//     email: 'dressme@dressme.com',
+//     password: '$2b$12$qW5s2a482Dl8VnNK2MEBW.JM4x0.4pl9MlDtcgc3HMXxGHuZaDGZm'
 // });
 // newUser.save()
 //        .then(savedUser => {
@@ -21,6 +23,23 @@
 //            console.log(err);
 //        });
 
+// Registering a new user
+// app.post('/api/register', (req, res) => {
+//     let {email, password} = req.body;
+//     bcrypt.genSalt(12, (err, salt) => {
+//         if(err){
+//             return res.status(500).send('Error generating salt');
+//         }
+//         // If no error, use salt to generate hash
+//         bcrypt.hash(password, salt, (err, hashedPassword) => {
+//             if(err){
+//                 return res.status(500).send('Error hashing password');
+//             }
+//             // If no error, save hashedPassword to db
+//             console.log(hashedPassword);
+//         });
+//     });
+// });
 
 // Create new Schedules
 // let newSchedule = Schedule({

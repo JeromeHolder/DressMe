@@ -29,10 +29,11 @@ export default class Home extends React.Component{
     // grabs text from the input ref and sends it to App
     textGrab = (e) => {
         e.preventDefault();
-        this.props.grabUserName(this.input.value);
-        this.input.value='';
+        this.props.grabUserName(this.state.textInput);
+        // this.state.textInput='';
         this.setState({
-            redirect: true
+            redirect: true,
+            textInput: ''
         })
     }
 

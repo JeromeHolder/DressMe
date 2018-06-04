@@ -195,4 +195,4 @@ export default class SADisplay extends React.Component{
             )
         }
     }
-}
+};

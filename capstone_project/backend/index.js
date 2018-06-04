@@ -5,7 +5,8 @@ const express = require('express'),
       mongoose = require('mongoose'),
       User = require('./models/User'),
       SA = require('./models/SA'),
-      Schedule = require('./models/Schedule');
+      Schedule = require('./models/Schedule'),
+      bcrypt = require('bcrypt');
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
@@ -23,19 +24,52 @@ app.use((req,res,next)=>{
     next();
 });
 
-// Initial request on load - gets data for current user
-app.get('/api/user', (req, res) => {
-    User.findById('5b14420fd7161c0b282bbac3')
+// Login function
+app.post('/api/login', (req, res) => {
+    // console.log(req.body)
+    let email = req.body.email;
+    let pw_guess = req.body.password;
+
+    User.find({'email': email})
         .then(result => {
-            if(!result) {
-                console.log('User does not exist');
+            if(result.length === 0) {
+                res.status(401).send('Incorrect username or password.');
             }
-            res.json(result);
+            else {
+                let user = result[0];
+                bcrypt.compare(pw_guess, user.password, (err, results) => {
+                    if(err){
+                        console.log(err);
+                        return res.status(500).send('Error authenticating user.');
+                    }
+                    if(!results){
+                        return res.status(401).send('Incorrect username or password');
+                    }
+                    else {
+                        let loginInfo = {user:user, results:results};
+                        res.send(loginInfo);
+                    };
+                });
+            };
         })
         .catch(err => {
             console.log(err);
         });
 });
+
+// Initial request on load - gets data for current user
+// app.get('/api/user', (req, res) => {
+//     User.findById('5b15664c5cbe38164c3f86ae')
+//         .then(result => {
+//             if(!result) {
+//                 console.log('User does not exist');
+//             }
+//             res.json(result);
+//         })
+//         .catch(err => {
+//             console.log(err);
+//         });
+// });
 
 // Initial request on load - gets list of SAs and uses google distance Matrix API to return distance from current user
 app.post('/api/distance', (req, res) => {
@@ -109,7 +143,7 @@ app.put('/api/book', (req, res) => {
     });
     // Updates the users record of bookings
     User.updateOne(
-        {'_id': '5b14420fd7161c0b282bbac3'},
+        {'_id': user},
         {'bookings': bookings}
         )
         .then(result => {
@@ -117,17 +151,18 @@ app.put('/api/book', (req, res) => {
         })
         .catch(err => {
             console.log(err);
-        })    
+        }); 
 });
 
+// Handles cancelling appointments
 app.put('/api/cancel', (req, res) => {
     let id = req.body.id;
     let bookings = req.body.bookings;
-    // console.log(req.body);
+    let user = req.body.user
+    // Changes booking status to false for SA's schedule
     Schedule.updateOne(
         {'hours._id': id},
-        { $set: {'hours.$.booked':'false'}},
-        { $unset: {'hours.$.bookedBy': ""}} //not working
+        { $set: {'hours.$.booked':'false'}}
         )
         .then(result => {
             console.log(result);
@@ -135,9 +170,10 @@ app.put('/api/cancel', (req, res) => {
         .catch(err => {
             console.log(err);
         });
+    // Removes the bookedBy field in the SA's schedule
     Schedule.updateOne(
         {'hours._id': id},
-        { $unset: {'hours.$.bookedBy': ""}} //not working
+        { $unset: {'hours.$.bookedBy': ""}}
         )
         .then(result => {
             console.log(result);
@@ -145,8 +181,9 @@ app.put('/api/cancel', (req, res) => {
         .catch(err => {
             console.log(err);
         });
+    // Updates the User's record of bookings
     User.updateOne(
-        {'_id': '5b14420fd7161c0b282bbac3'},
+        {'_id': user},
         {'bookings': bookings}
         )
         .then(result => {
@@ -154,7 +191,7 @@ app.put('/api/cancel', (req, res) => {
         })
         .catch(err => {
             console.log(err);
-        })
-})
+        });
+});
 
 app.listen(8080, ()=>{console.log('Server running on 8080');});
