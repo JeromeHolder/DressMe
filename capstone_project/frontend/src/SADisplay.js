@@ -1,8 +1,5 @@
 import React from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 export default class SADisplay extends React.Component{
     constructor(){
@@ -12,7 +9,8 @@ export default class SADisplay extends React.Component{
             date: '', //date selected by the user
             hours: null, //hours available for that day
             selectedHours: [], //hours selected for booking by the user
-            noavail: ''
+            noavail: '',
+            modal: false
         };
     };
 
@@ -36,12 +34,12 @@ export default class SADisplay extends React.Component{
     dateGrab = (x) => {
         this.setState({
             date: x.target.value
-        });
+        }, ()=>{this.formSubmit()});
     };
 
     // Submit handler for form
-    formSubmit = (e) => {
-        e.preventDefault();
+    formSubmit = () => {
+        // e.preventDefault();
         // Finds the matching date for the SA and returns that availability object
         let foundAvail = this.state.selectedSA.avail.find(el =>{
             return el.day === this.state.date
@@ -83,10 +81,10 @@ export default class SADisplay extends React.Component{
         };
     };
 
+    // Collects data about the users booking for storage and display
     grabBooking = (e) => {
         e.preventDefault();
 
-        // Collects data about the users booking for storage, display and possibly cancelling
         let bookedRecord = [];
         this.state.selectedHours.forEach(el =>{
             let record = {
@@ -119,9 +117,18 @@ export default class SADisplay extends React.Component{
         // Sets state for disabling list items once booked and resets the selected hours to an empty array
         this.setState({
             hours: copy,
-            selectedHours: []
+            selectedHours: [],
+            modal: !this.state.modal
         });
         this.props.bookFunction(dateid._id, hoursIDs, bookedRecord);
+    };
+
+    // Toggler for booking modal
+    toggle = (e) => {
+        e.preventDefault();
+        this.setState({
+            modal: !this.state.modal
+        })
     }
 
     render(){
@@ -131,24 +138,27 @@ export default class SADisplay extends React.Component{
             bookingOptions = <p>{this.state.noavail}</p>
         }
         else {
-            bookingOptions = <List>
+            bookingOptions = <form>
                                 {this.state.hours.map(val => (
-                                <ListItem
-                                    key={val.hour}
-                                    role={undefined}
-                                    dense
-                                    button
-                                >
-                                    <Checkbox
-                                        disableRipple
-                                        disabled={val.booked}
-                                        onClick={()=>{this.listCheck(val)}}
-                                    />
-                                    <ListItemText primary={val.hour + ':00'} />
-                                </ListItem>
+                                <div className="form-check form-check-inline" key={val._id}>
+                                    <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" disabled={val.booked} onClick={()=>{this.listCheck(val)}} />
+                                    <label className="form-check-label" >{val.hour + ':00'}</label>
+                                </div>
                                 ))}
-                                <button onClick={this.grabBooking}>Book Selected Hours</button> {/* want to disable this if nothing checked - probably change to bootstrap */}
-                            </List>
+                                <button onClick={this.toggle} disabled={this.state.selectedHours.length === 0 ? true : false} >Book Selected Hours</button>
+                                {/* <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button> */}
+                                <Modal isOpen={this.state.modal} toggle={this.toggle} >
+                                    <ModalHeader toggle={this.toggle}>Confirm Booking</ModalHeader>
+                                    <ModalBody>
+                                        Are you sure you want to book these appointments?
+                                        You can cancel appointments later from your profile page.
+                                    </ModalBody>
+                                    <ModalFooter>
+                                        <Button color="primary" onClick={this.grabBooking}>Book</Button>
+                                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                                    </ModalFooter>
+                                </Modal>
+                            </form>
         }
 
         // Conditionally renders the details page 
@@ -183,12 +193,11 @@ export default class SADisplay extends React.Component{
                     {expertiseList}
     
                     
-                    <form className='date-container' noValidate onSubmit={this.formSubmit}>
+                    <form className='date-container' >
                         <h3>Find Availability</h3>
                         <input id="date" type="date" min={minString} required onChange={this.dateGrab} />
-                        <button type='submit' >Check Availability</button>
                     </form>
-                    <div >
+                    <div className='bookingOptions' >
                         {bookingOptions}
                     </div>
                 </div>

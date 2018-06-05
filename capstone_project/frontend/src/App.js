@@ -10,8 +10,7 @@ export default withRouter(class App extends Component {
     super();
     this.state = {
       loginSuccess: false,
-      unsuccessful: '',
-      currentUser: []
+      unsuccessful: ''
     };
   };
 
@@ -24,11 +23,9 @@ export default withRouter(class App extends Component {
     axios.post('http://localhost:8080/api/login', login)
          .then(result => {
            localStorage.login_status = result.data.results;
-           let copy = Array.from(this.state.currentUser);
-           copy.push(result.data.user)
+           localStorage.origin = result.data.userAddress
            this.setState({
              loginSuccess: result.data.results,
-             currentUser: copy
            }, ()=> {if(this.state.loginSuccess === true){this.props.history.push('/profile')}});
          })
          .catch(err => {
@@ -39,8 +36,10 @@ export default withRouter(class App extends Component {
          });
   };
 
+  // Logout function from logout button on nav component
   logout = () => {
     localStorage.removeItem('login_status');
+    localStorage.removeItem('origin');
     this.setState({
       loginSuccess: false
     }, ()=>{this.props.history.push('/')});

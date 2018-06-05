@@ -26,7 +26,6 @@ app.use((req,res,next)=>{
 
 // Login function
 app.post('/api/login', (req, res) => {
-    // console.log(req.body)
     let email = req.body.email;
     let pw_guess = req.body.password;
 
@@ -46,7 +45,7 @@ app.post('/api/login', (req, res) => {
                         return res.status(401).send('Incorrect username or password');
                     }
                     else {
-                        let loginInfo = {user:user, results:results};
+                        let loginInfo = {userAddress:user.addressString, results:results};
                         res.send(loginInfo);
                     };
                 });
@@ -58,18 +57,18 @@ app.post('/api/login', (req, res) => {
 });
 
 // Initial request on load - gets data for current user
-// app.get('/api/user', (req, res) => {
-//     User.findById('5b15664c5cbe38164c3f86ae')
-//         .then(result => {
-//             if(!result) {
-//                 console.log('User does not exist');
-//             }
-//             res.json(result);
-//         })
-//         .catch(err => {
-//             console.log(err);
-//         });
-// });
+app.get('/api/user', (req, res) => {
+    User.findById('5b15664c5cbe38164c3f86ae')
+        .then(result => {
+            if(!result) {
+                console.log('User does not exist');
+            }
+            res.json(result);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
 
 // Initial request on load - gets list of SAs and uses google distance Matrix API to return distance from current user
 app.post('/api/distance', (req, res) => {
@@ -152,6 +151,7 @@ app.put('/api/book', (req, res) => {
         .catch(err => {
             console.log(err);
         }); 
+    res.send('Booked');
 });
 
 // Handles cancelling appointments
@@ -192,6 +192,7 @@ app.put('/api/cancel', (req, res) => {
         .catch(err => {
             console.log(err);
         });
+    res.send('Cancelled');
 });
 
 app.listen(8080, ()=>{console.log('Server running on 8080');});

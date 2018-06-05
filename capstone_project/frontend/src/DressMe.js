@@ -4,6 +4,7 @@ import './App.css';
 import Profile from './Profile';
 import Search from './Search';
 import axios from 'axios';
+import {Button} from 'reactstrap';
 
 export default withRouter(class DressMe extends Component {
   constructor(){
@@ -23,20 +24,19 @@ export default withRouter(class DressMe extends Component {
     if(!localStorage.login_status || localStorage.login_status === false){
       this.props.history.push('/');
     };
-    // Need something to handle the error on hard reload
-    let origin = this.props.currentUser[0].addressString;
-    axios.post('http://localhost:8080/api/distance', {origin:origin})
-         .then(results => {
-           let copy = Array.from(this.state.currentUser);
-           copy.push(this.props.currentUser[0]);
-           this.setState({
-             shoppingAssistants: results.data,
-             currentUser: copy,
-           });
-         })
-         .catch(err => {
+    let origin = localStorage.origin;
+    axios.all([axios.post('http://localhost:8080/api/distance', {origin:origin}), axios.get('http://localhost:8080/api/user')])
+          .then(results => {
+            let copy = Array.from(this.state.currentUser);
+            copy.push(results[1].data);
+            this.setState({
+              shoppingAssistants: results[0].data,
+              currentUser: copy,
+            });
+          })
+          .catch(err => {
             console.log(err);
-         });
+          });
   };
 
   // Ensures that the redirect wont keep a user away from the home page
@@ -122,7 +122,7 @@ export default withRouter(class DressMe extends Component {
     };
     this.setState({
       currentUser: copy
-    });
+    }, ()=>{this.componentDidMount()});
 
     // Sends the object 'cancelInfo' to the db to update
     axios.put('http://localhost:8080/api/cancel', cancelInfo)
@@ -136,7 +136,7 @@ export default withRouter(class DressMe extends Component {
 
   render() {
     return (
-      <div className="App container-fluid">
+      <div className="App">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <a className="navbar-brand">DressMe</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -165,11 +165,11 @@ export default withRouter(class DressMe extends Component {
                 </select>
               </div>
             </form>
-            <button onClick={this.props.logout} >Logout</button>
+            <Button onClick={this.props.logout} >Logout</Button>
           </div>
         </nav>
         <Switch>
-            <Route exact path='/profile' render={()=>{return <Profile user={this.state.currentUser}  cancelBooking={this.cancelBooking}/>}}/> {/*this.state.fireRedirect? <Redirect to='/profile/searchresults'/>:*/}
+            <Route exact path='/profile' render={()=>{return <Profile user={this.state.currentUser}  cancelBooking={this.cancelBooking}/>}}/> 
             <Route path='/profile/searchresults' render={()=>{ return <Search results={this.state.resultsJSX} bookFunction={this.bookFunction}/>}} />
         </Switch>
       </div>

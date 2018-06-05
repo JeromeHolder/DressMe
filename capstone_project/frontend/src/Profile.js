@@ -1,6 +1,52 @@
 import React from 'react';
+import {BounceLoader} from 'react-spinners';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 export default class Profile extends React.Component{
+    constructor(){
+        super();
+        this.state={
+            isLoading: true,
+            modal: false,
+            index: '',
+            id: ''
+        }
+    }
+
+    // Sets timeout for loading component
+    componentDidMount(){
+        setTimeout(() => {
+            this.setState({
+                isLoading: false
+            })
+        }, 2000)
+    };
+
+    // Grabs data from the item being cancelled, puts it in state and calls the toggle function
+    modalPrep = (i, id) => {
+        this.setState({
+            index: i,
+            id: id
+        },()=>{this.toggle()})
+    }
+
+    // Toggler for modal
+    toggle = (e, i, id) => {
+        this.setState({
+            modal: !this.state.modal
+        })
+    }
+
+    // Grabs data from state and cancels the booking
+    cancel = () => {
+        this.props.cancelBooking(this.state.index, this.state.id);
+        this.setState({
+            modal: !this.state.modal,
+            index: '',
+            id: ''
+        })
+    }
+
     render(){
         let user = this.props.user[0];
         let bookingsJSX;
@@ -10,21 +56,37 @@ export default class Profile extends React.Component{
         else {
             bookingsJSX = user.bookings.map((el, i) => {
                 return  <div key={i}>
-                            <p>{el.SA_fname} {el.SA_lname} on {el.date} at {el.hour.hour} <button onClick={()=>{this.props.cancelBooking(i, el.hour._id)}} >Cancel</button></p>
+                            <p>{el.SA_fname} {el.SA_lname} on {el.date} at {el.hour.hour} <Button onClick={()=>{this.modalPrep(i, el.hour._id)}} >Cancel</Button></p>
                         </div>
             })
         }
-        if(user === undefined){
-            return <p>loading</p>
+        if(this.state.isLoading){
+            return <div className='loading'>
+                        <BounceLoader
+                        color={'#123abc'} 
+                        loading={this.state.isLoading} 
+                        />
+                    </div>
         }
         else{
             return (
-                <div>
+                <div className='profileContent'>
                     <h2>{user.fname} {user.lname}</h2>
                     <img className='profilepic img-fluid' src={user.image} alt=""/>
                     <h3>{user.blurb}</h3>
                     <h3>Upcoming Appointments</h3>
                     {bookingsJSX}
+                    <Modal isOpen={this.state.modal} toggle={this.toggle} >
+                        <ModalHeader toggle={this.toggle}>Confirm Cancellation</ModalHeader>
+                        <ModalBody>
+                            Are you sure you want to cancel this appointment?
+                            This can't be undone.
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color="primary" onClick={this.cancel}>Cancel This Appointment</Button>
+                            <Button color="secondary" onClick={this.toggle}>Go Back</Button>
+                        </ModalFooter>
+                    </Modal>
                 </div>
             )
         }
