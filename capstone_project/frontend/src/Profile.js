@@ -51,19 +51,19 @@ export default class Profile extends React.Component{
         let user = this.props.user[0];
         let bookingsJSX;
         if(user === undefined || user.bookings === undefined || user.bookings.length === 0 ) {
-            bookingsJSX = <p>You have no upcoming appointments</p>
+            bookingsJSX = <p>You have no upcoming appointments.</p>
         }
         else {
             bookingsJSX = user.bookings.map((el, i) => {
                 return  <div key={i}>
-                            <p>{el.SA_fname} {el.SA_lname} on {el.date} at {el.hour.hour} <Button onClick={()=>{this.modalPrep(i, el.hour._id)}} >Cancel</Button></p>
+                            <p>{el.SA_fname} {el.SA_lname} on {el.date} at {el.hour.hour} <Button className='cancel' onClick={()=>{this.modalPrep(i, el.hour._id)}} >Cancel</Button></p>
                         </div>
             })
         }
         if(this.state.isLoading){
             return <div className='loading'>
                         <BounceLoader
-                        color={'#123abc'} 
+                        color={'#0268A6'} 
                         loading={this.state.isLoading} 
                         />
                     </div>
@@ -71,10 +71,13 @@ export default class Profile extends React.Component{
         else{
             return (
                 <div className='profileContent'>
-                    <h2>{user.fname} {user.lname}</h2>
                     <img className='profilepic img-fluid' src={user.image} alt=""/>
-                    <h3>{user.blurb}</h3>
-                    <h3>Upcoming Appointments</h3>
+                    <hr className='separator'/>
+                    <h2>{user.fname} {user.lname}</h2>
+                    <hr className='separator'/>
+                    <p className='blurb'>{user.blurb}</p>
+                    <hr className='separator'/>
+                    <h4 className='appointmentsHeader'>Upcoming Appointments</h4>
                     {bookingsJSX}
                     <Modal isOpen={this.state.modal} toggle={this.toggle} >
                         <ModalHeader toggle={this.toggle}>Confirm Cancellation</ModalHeader>

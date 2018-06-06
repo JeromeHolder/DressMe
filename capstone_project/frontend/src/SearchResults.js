@@ -9,9 +9,12 @@ export default class SearchResults extends React.Component{
         // };
         let saList = this.props.results.map(el => {
             let urlParam = '/profile/searchresults/' + el.id
-            return  <li className="list-group-item d-flex justify-content-between align-items-center" key={el.id}>
-                        <Link to={urlParam} onClick={()=>{this.props.resultsClick(el)}} >{el.fname} {el.lname}</Link>
-                        <p>{el.rating}</p>
+            return  <li className="resultItem align-items-center" key={el.id}>
+                        <Link className='resultLink' to={urlParam} onClick={()=>{this.props.resultsClick(el)}} >{el.fname} {el.lname}</Link>
+                        <div className='rateCon'>
+                            <p className='rating'>{el.rating}</p>
+                            <img className='star' src='/star.svg' alt=''></img>
+                        </div>
                     </li>
         });
         return (

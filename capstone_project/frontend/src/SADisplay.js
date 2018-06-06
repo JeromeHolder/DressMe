@@ -138,15 +138,14 @@ export default class SADisplay extends React.Component{
             bookingOptions = <p>{this.state.noavail}</p>
         }
         else {
-            bookingOptions = <form>
+            bookingOptions = <form className='bookingOptions'>
                                 {this.state.hours.map(val => (
                                 <div className="form-check form-check-inline" key={val._id}>
                                     <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" disabled={val.booked} onClick={()=>{this.listCheck(val)}} />
                                     <label className="form-check-label" >{val.hour + ':00'}</label>
                                 </div>
                                 ))}
-                                <button onClick={this.toggle} disabled={this.state.selectedHours.length === 0 ? true : false} >Book Selected Hours</button>
-                                {/* <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button> */}
+                                <Button className='btn-secondary custom-btn' onClick={this.toggle} disabled={this.state.selectedHours.length === 0 ? true : false} >Book Selected Hours</Button>
                                 <Modal isOpen={this.state.modal} toggle={this.toggle} >
                                     <ModalHeader toggle={this.toggle}>Confirm Booking</ModalHeader>
                                     <ModalBody>
@@ -185,19 +184,26 @@ export default class SADisplay extends React.Component{
             let minString = year + '-' + month + '-' + date;
             return (
                 <div className='SADisplay' >
-                    <h1>{this.state.selectedSA.fname} {this.state.selectedSA.lname}</h1>
-                    <img className='SAimage' src={this.state.selectedSA.image} alt=""/>
-                    <h2>{this.state.selectedSA.availRad}</h2>
-                    <h3>{this.state.selectedSA.rating}</h3>
-                    <h3>{this.state.selectedSA.blurb}</h3>
+                    <img className='SAprofilepic' src={this.state.selectedSA.image} alt=""/>
+                    <hr className='separator'/>
+                    <div className="profileTitle">
+                    <h2>{this.state.selectedSA.fname} {this.state.selectedSA.lname}</h2>
+                    <div className='SArateCon'>
+                        <p className='SArating'>{this.state.selectedSA.rating}</p>
+                        <img className='SAstar' src='/star.svg' alt=''></img>
+                    </div>
+                    </div>
+                    <hr className='separator'/>
+                    <p className='blurb'>{this.state.selectedSA.blurb}</p>
+                    <hr className='separator'/>
+                    <h5>Areas of Expertise</h5>
                     {expertiseList}
-    
-                    
+                    <hr className='separator'/>                    
                     <form className='date-container' >
-                        <h3>Find Availability</h3>
-                        <input id="date" type="date" min={minString} required onChange={this.dateGrab} />
+                        <h5 className='appointmentsHeader'>Find Availability</h5>
+                        <input className='datepicker' id="date" type="date" min={minString} required onChange={this.dateGrab} />
                     </form>
-                    <div className='bookingOptions' >
+                    <div>
                         {bookingOptions}
                     </div>
                 </div>

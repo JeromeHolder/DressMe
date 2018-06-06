@@ -136,9 +136,9 @@ export default withRouter(class DressMe extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App fatFont">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <a className="navbar-brand">DressMe</a>
+          <a className="navbar-brand navlogo">DressMe</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -148,16 +148,17 @@ export default withRouter(class DressMe extends Component {
                 <Link className="nav-link" onClick={this.backToHome} to="/profile">Profile </Link>
               </li>
             </ul>
-            <form className="form-inline my-2 my-lg-0" onSubmit={this.grabSearch}>
-              <div className="input-group flexbox">
-                <button className="btn btn-outline-success my-2 my-sm-0 btnColor" type="submit">Search</button>
-                <select className='btn btn-outline-success my-2 my-sm-0 btnColor' onChange={this.updateDistance}>
+            <div>
+            <form className="searchForm my-2 my-lg-0" onSubmit={this.grabSearch}>
+              <div className=" ">
+                <button className="btn btn-primary custom-btn btn-outline-* searchColor my-2 my-sm-0 btnColor searchComponent" type="submit">Search</button>
+                <select className='btn btn-primary custom-btn btn-outline-* my-2 my-sm-0 btnColor searchComponent' onChange={this.updateDistance}>
                     <option value="5">5km</option>
                     <option value="10">10km</option>
                     <option value="15">15km</option>
                     <option value="20">20km</option>
                 </select>
-                <select className='btn btn-outline-success my-2 my-sm-0 btnColor' onChange={this.updateExpertise}>
+                <select className='btn btn-primary custom-btn btn-outline-* my-2 my-sm-0 btnColor searchComponent' onChange={this.updateExpertise}>
                     <option value="Casual">Casual</option>
                     <option value="Business Casual">Business Casual</option>
                     <option value="Business">Business</option>
@@ -165,7 +166,8 @@ export default withRouter(class DressMe extends Component {
                 </select>
               </div>
             </form>
-            <Button onClick={this.props.logout} >Logout</Button>
+            </div>
+            <Button className='logout' onClick={this.props.logout} >Logout</Button>
           </div>
         </nav>
         <Switch>

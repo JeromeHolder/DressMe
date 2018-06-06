@@ -1,33 +1,96 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
 
-.SAimage {
-    max-height: 10vh;
-    max-width: 10vw;
-}
+/* marmalade #F15722 */
+/* Ruby #A52026 */
+/* Royal Blue #0268A6 */
+/* Whitecap #D7E1Eb */
+/* Navy Blue #2E3373 */
 
 .app-container {
     height:100%;
     padding-top:2.5%;
     display:grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 25% 75%;
     grid-template-rows: 90% 10%;
 }
 
 .sidebar {
-    height: 100%;
+    height: 85vh;
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 4;
     overflow: hidden;
+    margin-left: 2%;
+    padding-right: 2%;
+    border-right: 1px solid #0268A6;
+}
+
+.resultItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2%;
+    margin-right: 2%;
+    border-bottom: 1px solid #0268A6;
+    padding: 1em;
+}
+
+.resultLink {
+    color: #2E3373;
+}
+
+.rateCon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width:25%;
+    height: 75%;
+}
+.rating{
+    margin-right: .5em;
+    margin: 0 auto;
+}
+
+.star {
+    max-width: 40%;
+    max-height: 40%;
+}
+
+.SArateCon {
+    width: 25%;
+}
+
+.profileTitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.SArating {
+    display: inline-block;
+    margin-right: 1em;
+    margin: 0 auto;
+}
+
+.SAstar {
+    max-width: 10%;
+    max-height: 10%;
+    margin-left: .5em;
+    margin-bottom: .4em;
 }
 
 .SADisplay {
-    height: 100%;
+    height: 85vh;
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 4;
     overflow: hidden;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .date-container {
@@ -41,6 +104,32 @@
 .profilepic {
     max-height: 20%;
     max-width: 20%;
+    border-radius: 50%;
+    border: #F15722 1px solid;
+}
+
+.SAprofilepic {
+    max-height: 30%;
+    max-width: 30%;
+    border-radius: 50%;
+    border: #F15722 1px solid;
+}
+
+.profileContent {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    /* height: 85vh; */
+}
+
+.separator {
+    background-color: #0268A6;
+    width: 50%;
+}
+
+.blurb{
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .loading {
@@ -69,16 +158,50 @@
 .logo {
     display: inline-block;
     margin-left: 2%;
+    font-family: 'Abril Fatface';
+    color: #F15722;
 }
 
-.landingnav {
-    margin-top: .5%;
+.navlogo {
+    margin-left: 2%;
 }
 
-.loginlink {
+.loginlink, .logout {
     display: inline-block;
     float: right;
     margin-right: 2%;
+    padding: .3% .5%;
+    margin-top: .4%
+}
+
+.loginlink {
+    background-color: #F15722;
+	border-color: #F15722;
+}
+
+.logout, .cancel {
+    background-color: #A52026;
+	border-color: #A52026;
+}
+
+.cancel {
+    padding: .2% .3%;
+    margin-left: 2%;
+    vertical-align: middle;
+}
+
+.btn-secondary.custom-btn {
+	background-color: #0268A6;
+	border-color: #0268A6;
+    color: #D7E1EB;
+}
+
+.datepicker {
+    margin-bottom: 2%;
+}
+
+.appointmentsHeader {
+    margin-bottom: 2%;
 }
 
 .loginPage {
@@ -89,7 +212,8 @@
 
 .landingImages {
     width: 100vw;
-    height: 98vh;
+    height: 100vh;
+    position: relative;
 }
 
 @keyframes animatedBackgroundLeft {
@@ -100,12 +224,15 @@
 .top { 
 	width: 100%; 
     height: 33%; 
+    padding: 0px 0px;
+    margin: 0px 0px;
     background-image: url('./Top.png');
-	background-position: 0px 0px;
-	background-repeat: repeat-x;
+	/* background-position: 0px 0px;
+	background-repeat: repeat-x; */
 
     animation: animatedBackgroundLeft 70s linear infinite;
     background-size: cover;
+    /* filter: opacity(.5); */
 }
 
 @keyframes animatedBackgroundRight {
@@ -117,20 +244,89 @@
 	width: 100%; 
     height: 33%; 
     background-image: url('./Middle.png');
-	background-position: 0px 0px;
-	background-repeat: repeat-x;
+	/* background-position: 0px 0px;
+	background-repeat: repeat-x; */
 
     animation: animatedBackgroundRight 70s linear infinite;
     background-size: cover;
+    /* filter: opacity(.5); */
 }
 
 .bottom { 
 	width: 100%; 
     height: 33%; 
     background-image: url('./Bottom.png');
-	background-position: 0px 0px;
-	background-repeat: repeat-x;
+	/* background-position: 0px 0px;
+	background-repeat: repeat-x; */
 
     animation: animatedBackgroundLeft 70s linear infinite;
     background-size: cover;
+    /* filter: opacity(.5); */
 }
+
+.fatFont {
+    font-family: 'Abril Fatface';
+}
+
+.loginHeader {
+    color: #D7E1EB;
+}
+
+/* .modal-title {
+    margin-left: 15%;
+} */
+
+.loginField {
+    display: block;
+    text-align: center;
+    width: 100%
+}
+
+.modalStyle {
+    background-color: #0268A6;
+    height: 100%;
+    margin-bottom: 0;
+}
+
+.navbar, .nav-link {
+    background-color: #0268A6 !important;
+    color: #D7E1Eb !important;
+}
+
+.searchComponent {
+    margin-right: 2%;
+    padding: .3% .5%;   
+}
+
+.searchForm {
+    width: 300px;
+}
+
+.searchColor{
+    color: #A52026;
+}
+
+.btn-primary.custom-btn {
+	background-color: rgb(41, 128, 182);
+    border-color: #A52026;
+    color: #D7E1EB;
+}
+
+.modal {
+    text-align: center;
+    /* padding: 0!important; */
+    }
+    
+    .modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
+    }
+    
+    .modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    }
