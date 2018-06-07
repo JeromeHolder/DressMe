@@ -79,15 +79,15 @@ export default class Profile extends React.Component{
                     <hr className='separator'/>
                     <h4 className='appointmentsHeader'>Upcoming Appointments</h4>
                     {bookingsJSX}
-                    <Modal isOpen={this.state.modal} toggle={this.toggle} >
-                        <ModalHeader toggle={this.toggle}>Confirm Cancellation</ModalHeader>
+                    <Modal className='modalText ' isOpen={this.state.modal} toggle={this.toggle} >
+                        <ModalHeader className='loginField' toggle={this.toggle}>Confirm Cancellation</ModalHeader>
                         <ModalBody>
                             Are you sure you want to cancel this appointment?
                             This can't be undone.
                         </ModalBody>
                         <ModalFooter>
-                            <Button color="primary" onClick={this.cancel}>Cancel This Appointment</Button>
-                            <Button color="secondary" onClick={this.toggle}>Go Back</Button>
+                            <Button className='cancel' onClick={this.cancel}>Cancel This Appointment</Button>
+                            <Button className='goBack' color="secondary" onClick={this.toggle}>Go Back</Button>
                         </ModalFooter>
                     </Modal>
                 </div>

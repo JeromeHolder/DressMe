@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
 
+/* Colors */
 /* marmalade #F15722 */
 /* Ruby #A52026 */
 /* Royal Blue #0268A6 */
@@ -119,7 +120,6 @@
     margin-left: 5%;
     margin-right: 5%;
     margin-top: 5%;
-    /* height: 85vh; */
 }
 
 .separator {
@@ -166,17 +166,22 @@
     margin-left: 2%;
 }
 
-.loginlink, .logout {
+.loginlink, .logout, .goBack, .book {
     display: inline-block;
     float: right;
     margin-right: 2%;
-    padding: .3% .5%;
-    margin-top: .4%
+    padding-bottom: .3%;
+    padding-top: .3%;
+    margin-top: .4%;
 }
 
 .loginlink {
     background-color: #F15722;
 	border-color: #F15722;
+}
+
+.badLogin {
+    color: #A52026
 }
 
 .logout, .cancel {
@@ -185,9 +190,15 @@
 }
 
 .cancel {
-    padding: .2% .3%;
+    padding-bottom: .3%;
+    padding-top: .3%;
     margin-left: 2%;
     vertical-align: middle;
+}
+
+.book {
+    background-color: #F15722;
+	border-color: #F15722;
 }
 
 .btn-secondary.custom-btn {
@@ -218,63 +229,53 @@
 
 @keyframes animatedBackgroundLeft {
 	from { background-position: 0 0; }
-	to { background-position: 1000% 0; }
+	to { background-position: 2000% 0; }
 }
 
-.top { 
-	width: 100%; 
+.top {
+    width: 100%; 
     height: 33%; 
     padding: 0px 0px;
     margin: 0px 0px;
     background-image: url('./Top.png');
-	/* background-position: 0px 0px;
-	background-repeat: repeat-x; */
-
-    animation: animatedBackgroundLeft 70s linear infinite;
+	background-position: 0px 0px;
+	background-repeat: repeat-x;
+    animation: animatedBackgroundLeft 130s linear infinite;
     background-size: cover;
-    /* filter: opacity(.5); */
 }
 
 @keyframes animatedBackgroundRight {
 	from { background-position: 0 0; }
-	to { background-position: -1000% 0; }
+	to { background-position: -2000% 0; }
 }
 
 .middle { 
 	width: 100%; 
     height: 33%; 
     background-image: url('./Middle.png');
-	/* background-position: 0px 0px;
-	background-repeat: repeat-x; */
-
-    animation: animatedBackgroundRight 70s linear infinite;
+	background-position: 0px 0px;
+	background-repeat: repeat-x;
+    animation: animatedBackgroundRight 130s linear infinite;
     background-size: cover;
-    /* filter: opacity(.5); */
 }
 
 .bottom { 
 	width: 100%; 
     height: 33%; 
     background-image: url('./Bottom.png');
-	/* background-position: 0px 0px;
-	background-repeat: repeat-x; */
-
-    animation: animatedBackgroundLeft 70s linear infinite;
+	background-position: 0px 0px;
+	background-repeat: repeat-x;
+    animation: animatedBackgroundLeft 130s linear infinite;
     background-size: cover;
-    /* filter: opacity(.5); */
 }
 
 .fatFont {
     font-family: 'Abril Fatface';
 }
 
-.loginHeader {
+.modalText {
     color: #D7E1EB;
 }
-
-/* .modal-title {
-    margin-left: 15%;
-} */
 
 .loginField {
     display: block;
@@ -314,19 +315,24 @@
 
 .modal {
     text-align: center;
-    /* padding: 0!important; */
-    }
+    padding: 0!important;
+}
     
-    .modal:before {
+.modal:before {
     content: '';
     display: inline-block;
     height: 100%;
     vertical-align: middle;
     margin-right: -4px;
-    }
+}
     
-    .modal-dialog {
+.modal-dialog {
     display: inline-block;
-    text-align: left;
+    text-align: center;
     vertical-align: middle;
-    }
+}
+
+.modal-content {
+    background-color: #0268A6;
+    font-family: 'Abril Fatface';
+}

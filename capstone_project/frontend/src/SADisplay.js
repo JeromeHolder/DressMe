@@ -146,15 +146,15 @@ export default class SADisplay extends React.Component{
                                 </div>
                                 ))}
                                 <Button className='btn-secondary custom-btn' onClick={this.toggle} disabled={this.state.selectedHours.length === 0 ? true : false} >Book Selected Hours</Button>
-                                <Modal isOpen={this.state.modal} toggle={this.toggle} >
-                                    <ModalHeader toggle={this.toggle}>Confirm Booking</ModalHeader>
-                                    <ModalBody>
+                                <Modal className='modalText' isOpen={this.state.modal} toggle={this.toggle} >
+                                    <ModalHeader className='loginField' toggle={this.toggle}>Confirm Booking</ModalHeader>
+                                    <ModalBody >
                                         Are you sure you want to book these appointments?
                                         You can cancel appointments later from your profile page.
                                     </ModalBody>
                                     <ModalFooter>
-                                        <Button color="primary" onClick={this.grabBooking}>Book</Button>
-                                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                                        <Button className='book' onClick={this.grabBooking}>Book</Button>
+                                        <Button className='goBack' color="secondary" onClick={this.toggle}>Cancel</Button>
                                     </ModalFooter>
                                 </Modal>
                             </form>
@@ -177,7 +177,8 @@ export default class SADisplay extends React.Component{
             if(month < 10) {
                 month = '0' + month
             }
-            let date = today.getDate();
+            let date = today.getDate()+1;
+            // console.log(date);
             if(date < 10){
                 date = '0' + date
             }
@@ -201,7 +202,7 @@ export default class SADisplay extends React.Component{
                     <hr className='separator'/>                    
                     <form className='date-container' >
                         <h5 className='appointmentsHeader'>Find Availability</h5>
-                        <input className='datepicker' id="date" type="date" min={minString} required onChange={this.dateGrab} />
+                        <input className='datepicker' id="date" type="date" min={minString} required onChange={this.dateGrab}/>
                     </form>
                     <div>
                         {bookingOptions}

@@ -43,7 +43,7 @@
 
 // Create new Schedules
 // let newSchedule = Schedule({
-//     day: '2018-06-09',
+//     day: '2018-06-11',
 //     hours: [
 //         {
 //             hour: 8,
@@ -64,7 +64,22 @@
 //             hour: 11,
 //             booked: false,
 //             bookedBy: null
-//         }
+//         },
+//         {
+//             hour: 12,
+//             booked: false,
+//             bookedBy: null
+//         },
+//         {
+//             hour: 13,
+//             booked: false,
+//             bookedBy: null
+//         },
+//         {
+//             hour: 14,
+//             booked: false,
+//             bookedBy: null
+//         },
 //     ]
 // });
 
@@ -96,7 +111,8 @@
 //         'Business'
 //     ],
 //     avail: [
-//     ]
+//     ],
+//     blurb: '',
 // });
 
 // newSA.save()

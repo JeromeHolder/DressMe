@@ -15,7 +15,6 @@ mongoose.connect('mongodb://localhost/Capstone');
 const db = mongoose.connection;
 db.on('open', ()=>{console.log('Connected to mongodb');});
 
-
 // Allows CORS
 app.use((req,res,next)=>{
     res.header("Access-Control-Allow-Origin", "*");
