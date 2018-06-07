@@ -68,10 +68,10 @@ export default withRouter(class DressMe extends Component {
       this.state.shoppingAssistants.forEach(el => {
         let found = el.expertise.find(exp => {
           return exp === this.state.expertise
-        })
+        });
         if(found !== undefined){
           copy.push(el);
-        }
+        };
       });
       let filtered = copy.filter(el => {
         if(el.distance <= this.state.distance+el.availRad){

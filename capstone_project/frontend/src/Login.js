@@ -9,7 +9,7 @@ export default withRouter(class Login extends React.Component{
             password: '',
             email:'',
             modal: false
-        }
+        };
     };
 
     // Redirects to profile if already logged in
@@ -18,7 +18,7 @@ export default withRouter(class Login extends React.Component{
             this.props.history.push('/profile');
             this.setState({
                 modal: !this.state.modal
-            })
+            });
         };
     };
 
@@ -34,7 +34,7 @@ export default withRouter(class Login extends React.Component{
 
     focus = () => {
         this.emailField.focus();
-    }
+    };
 
     // Gets text from password field
     grabPassword = (e) => {
@@ -83,6 +83,6 @@ export default withRouter(class Login extends React.Component{
                     </ModalBody>
                 </Modal>
             </div>
-        )
-    }
+        );
+    };
 });

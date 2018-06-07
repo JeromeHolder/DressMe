@@ -10,8 +10,8 @@ export default class Profile extends React.Component{
             modal: false,
             index: '',
             id: ''
-        }
-    }
+        };
+    };
 
     // Sets timeout for loading component
     componentDidMount(){
@@ -19,7 +19,7 @@ export default class Profile extends React.Component{
             this.setState({
                 isLoading: false
             })
-        }, 2000)
+        }, 2000);
     };
 
     // Grabs data from the item being cancelled, puts it in state and calls the toggle function
@@ -27,15 +27,15 @@ export default class Profile extends React.Component{
         this.setState({
             index: i,
             id: id
-        },()=>{this.toggle()})
-    }
+        },()=>{this.toggle()});
+    };
 
     // Toggler for modal
     toggle = (e, i, id) => {
         this.setState({
             modal: !this.state.modal
-        })
-    }
+        });
+    };
 
     // Grabs data from state and cancels the booking
     cancel = () => {
@@ -44,8 +44,8 @@ export default class Profile extends React.Component{
             modal: !this.state.modal,
             index: '',
             id: ''
-        })
-    }
+        });
+    };
 
     render(){
         let user = this.props.user[0];
@@ -58,8 +58,8 @@ export default class Profile extends React.Component{
                 return  <div key={i}>
                             <p>{el.SA_fname} {el.SA_lname} on {el.date} at {el.hour.hour} <Button className='cancel' onClick={()=>{this.modalPrep(i, el.hour._id)}} >Cancel</Button></p>
                         </div>
-            })
-        }
+            });
+        };
         if(this.state.isLoading){
             return <div className='loading'>
                         <BounceLoader
@@ -91,7 +91,7 @@ export default class Profile extends React.Component{
                         </ModalFooter>
                     </Modal>
                 </div>
-            )
-        }
-    }
-}
+            );
+        };
+    };
+};

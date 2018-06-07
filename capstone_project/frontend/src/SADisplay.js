@@ -27,8 +27,8 @@ export default class SADisplay extends React.Component{
             this.setState({
                 selectedSA: this.props.results
             });
-        }
-    }
+        };
+    };
 
     // Updates state with value from date picker
     dateGrab = (x) => {
@@ -39,7 +39,6 @@ export default class SADisplay extends React.Component{
 
     // Submit handler for form
     formSubmit = () => {
-        // e.preventDefault();
         // Finds the matching date for the SA and returns that availability object
         let foundAvail = this.state.selectedSA.avail.find(el =>{
             return el.day === this.state.date
@@ -109,10 +108,10 @@ export default class SADisplay extends React.Component{
         copy.forEach(element => {
             let foundMatch = this.state.selectedHours.find(el  => {
                 return el._id === element._id
-            })
+            });
             if(foundMatch !== undefined){
                 element.booked = true;
-            }
+            };
         });
         // Sets state for disabling list items once booked and resets the selected hours to an empty array
         this.setState({
@@ -128,8 +127,8 @@ export default class SADisplay extends React.Component{
         e.preventDefault();
         this.setState({
             modal: !this.state.modal
-        })
-    }
+        });
+    };
 
     render(){
         // Conditionally displays the list of options based on whether availability exists or not
@@ -158,7 +157,7 @@ export default class SADisplay extends React.Component{
                                     </ModalFooter>
                                 </Modal>
                             </form>
-        }
+        };
 
         // Conditionally renders the details page 
         if(this.state.selectedSA === null){
@@ -168,7 +167,7 @@ export default class SADisplay extends React.Component{
             // Maps the list of expertise for the selected SA
             let expertiseList = this.state.selectedSA.expertise.map((item, i) => {
                 return <span key={i} >{item} </span>
-            })
+            });
 
             // Constructs the current date for use as the min to validate the datepicker
             let today = new Date();
@@ -176,12 +175,12 @@ export default class SADisplay extends React.Component{
             let month = today.getMonth()+1;
             if(month < 10) {
                 month = '0' + month
-            }
+            };
             let date = today.getDate()+1;
             // console.log(date);
             if(date < 10){
                 date = '0' + date
-            }
+            };
             let minString = year + '-' + month + '-' + date;
             return (
                 <div className='SADisplay' >
@@ -208,7 +207,7 @@ export default class SADisplay extends React.Component{
                         {bookingOptions}
                     </div>
                 </div>
-            )
-        }
-    }
+            );
+        };
+    };
 };
