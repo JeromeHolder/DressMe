@@ -1,0 +1,339 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
+
+/* Colors */
+/* marmalade #F15722 */
+/* Ruby #A52026 */
+/* Royal Blue #0268A6 */
+/* Whitecap #D7E1Eb */
+/* Navy Blue #2E3373 */
+
+.app-container {
+    height:100%;
+    padding-top:2.5%;
+    display:grid;
+    grid-template-columns: 25% 75%;
+    grid-template-rows: 90% 10%;
+}
+
+.sidebar {
+    height: 85vh;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    overflow: hidden;
+    margin-left: 2%;
+    padding-right: 2%;
+    border-right: 1px solid #0268A6;
+}
+
+.resultItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2%;
+    margin-right: 2%;
+    border-bottom: 1px solid #0268A6;
+    padding: 1em;
+}
+
+.resultLink {
+    color: #2E3373;
+}
+
+.rateCon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width:25%;
+    height: 75%;
+}
+.rating{
+    margin-right: .5em;
+    margin: 0 auto;
+}
+
+.star {
+    max-width: 40%;
+    max-height: 40%;
+}
+
+.SArateCon {
+    width: 25%;
+}
+
+.profileTitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.SArating {
+    display: inline-block;
+    margin-right: 1em;
+    margin: 0 auto;
+}
+
+.SAstar {
+    max-width: 10%;
+    max-height: 10%;
+    margin-left: .5em;
+    margin-bottom: .4em;
+}
+
+.SADisplay {
+    height: 85vh;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    overflow: hidden;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.date-container {
+    display: 'flex',
+}
+
+.text {
+    width: 200;
+}
+
+.profilepic {
+    max-height: 20%;
+    max-width: 20%;
+    border-radius: 50%;
+    border: #F15722 1px solid;
+}
+
+.SAprofilepic {
+    max-height: 30%;
+    max-width: 30%;
+    border-radius: 50%;
+    border: #F15722 1px solid;
+}
+
+.profileContent {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+}
+
+.separator {
+    background-color: #0268A6;
+    width: 50%;
+}
+
+.blurb{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+.profileContent, .SADisplay, .sidebar, .bookingOptions, .loginPage, .navbar {
+    opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: .5s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.logo {
+    display: inline-block;
+    margin-left: 2%;
+    font-family: 'Abril Fatface';
+    color: #F15722;
+}
+
+.navlogo {
+    margin-left: 2%;
+}
+
+.loginlink, .logout, .goBack, .book {
+    display: inline-block;
+    float: right;
+    margin-right: 2%;
+    padding-bottom: .3%;
+    padding-top: .3%;
+    margin-top: .4%;
+}
+
+.loginlink {
+    background-color: #F15722;
+	border-color: #F15722;
+}
+
+.badLogin {
+    color: #A52026
+}
+
+.logout, .cancel {
+    background-color: #A52026;
+	border-color: #A52026;
+}
+
+.cancel {
+    padding-bottom: .3%;
+    padding-top: .3%;
+    margin-left: 2%;
+    vertical-align: middle;
+}
+
+.book {
+    background-color: #F15722;
+	border-color: #F15722;
+}
+
+.btn-secondary.custom-btn {
+	background-color: #0268A6;
+	border-color: #0268A6;
+    color: #D7E1EB;
+}
+
+.datepicker {
+    margin-bottom: 2%;
+}
+
+.appointmentsHeader {
+    margin-bottom: 2%;
+}
+
+.loginPage {
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.landingImages {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+@keyframes animatedBackgroundLeft {
+	from { background-position: 0 0; }
+	to { background-position: 2000% 0; }
+}
+
+.top {
+    width: 100%; 
+    height: 33%; 
+    padding: 0px 0px;
+    margin: 0px 0px;
+    background-image: url('./Top.png');
+	background-position: 0px 0px;
+	background-repeat: repeat-x;
+    animation: animatedBackgroundLeft 130s linear infinite;
+    background-size: cover;
+}
+
+@keyframes animatedBackgroundRight {
+	from { background-position: 0 0; }
+	to { background-position: -2000% 0; }
+}
+
+.middle { 
+	width: 100%; 
+    height: 33%; 
+    background-image: url('./Middle.png');
+	background-position: 0px 0px;
+	background-repeat: repeat-x;
+    animation: animatedBackgroundRight 130s linear infinite;
+    background-size: cover;
+}
+
+.bottom { 
+	width: 100%; 
+    height: 33%; 
+    background-image: url('./Bottom.png');
+	background-position: 0px 0px;
+	background-repeat: repeat-x;
+    animation: animatedBackgroundLeft 130s linear infinite;
+    background-size: cover;
+}
+
+.fatFont {
+    font-family: 'Abril Fatface';
+}
+
+.modalText {
+    color: #D7E1EB;
+}
+
+.loginField {
+    display: block;
+    text-align: center;
+    width: 100%
+}
+
+.modalStyle {
+    background-color: #0268A6;
+    height: 100%;
+    margin-bottom: 0;
+}
+
+.navbar, .nav-link {
+    background-color: #0268A6 !important;
+    color: #D7E1Eb !important;
+}
+
+.searchComponent {
+    margin-right: 2%;
+    padding: .3% .5%;   
+}
+
+.searchForm {
+    width: 300px;
+}
+
+.searchColor{
+    color: #A52026;
+}
+
+.btn-primary.custom-btn {
+	background-color: rgb(41, 128, 182);
+    border-color: #A52026;
+    color: #D7E1EB;
+}
+
+.modal {
+    text-align: center;
+    padding: 0!important;
+}
+    
+.modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
+}
+    
+.modal-dialog {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.modal-content {
+    background-color: #0268A6;
+    font-family: 'Abril Fatface';
+}
